@@ -23,15 +23,15 @@ class BishopTactic < Tactic
   end
 
   def simulate(deck)
-    t3, t4, = deck
-    r3 = simulate_turn(t3)
-    r4 = simulate_turn(t4)
+    hand3, hand4, = deck
+    t3 = simulate_turn(hand3)
+    t4 = simulate_turn(hand4)
     {
-      least_one_5: r3[:coin] >= 5 || r4[:coin] >= 5,
-      least_one_6: r3[:coin] >= 6 || r4[:coin] >= 6,
-      both_5: r3[:coin] >= 5 && r4[:coin] >= 5,
-      trashed_estate: r3[:trashed_estate] || r4[:trashed_estate],
-      trashed_estate_least_one_5: (r3[:trashed_estate] || r4[:trashed_estate]) && (r3[:coin] >= 5 || r4[:coin] >= 5)
+      least_one_5: calc_least_one_5(t3, t4),
+      least_one_6: calc_least_one_6(t3, t4),
+      both_5: calc_both_5(t3, t4),
+      trashed_estate: or_for(t3, t4, :trashed_estate),
+      trashed_estate_least_one_5: or_for(t3, t4, :trashed_estate) && calc_least_one_5(t3, t4)
     }
   end
 

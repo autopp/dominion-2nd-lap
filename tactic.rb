@@ -69,6 +69,32 @@ class Tactic
       puts "- #{text}: #{(count / all.to_f * 100).round(2)}%"
     end
   end
+
+  # Helpers
+
+  def or_for(t3, t4, key)
+    t3[key] || t4[key]
+  end
+
+  def and_for(t3, t4, key)
+    t3[key] && t4[key]
+  end
+
+  def calc_least_one_5(t3, t4)
+    t3[:coin] >= 5 || t4[:coin] >= 5
+  end
+
+  def calc_least_one_6(t3, t4)
+    t3[:coin] >= 6 || t4[:coin] >= 6
+  end
+
+  def calc_least_one_7(t3, t4)
+    t3[:coin] >= 7 || t4[:coin] >= 7
+  end
+
+  def calc_both_5(t3, t4)
+    t3[:coin] >= 5 && t4[:coin] >= 5
+  end
 end
 
 module GenDecksBySilverAndAction
