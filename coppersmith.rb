@@ -24,13 +24,13 @@ class CoppersmithTactic < Tactic
     t4 = simulate_turn(hand4)
 
     {
-      least_one_5: t3[:coin] >= 5 || t4[:coin] >= 5,
-      least_one_6: t3[:coin] >= 6 || t4[:coin] >= 6,
-      least_one_7: t3[:coin] >= 7 || t4[:coin] >= 7,
-      least_one_8: t3[:coin] >= 8 || t4[:coin] >= 8,
-      both_5: t3[:coin] >= 5 && t4[:coin] >= 5,
-      both_5_6: (t3[:coin] == 5 && t4[:coin] >= 6) || (t3[:coin] >= 6 && t4[:coin] == 5) || (t3[:coin] >= 6 && t4[:coin] >= 6),
-      both_6: t3[:coin] >= 6 && t4[:coin] >= 6
+      least_one_5: least_one_5?(t3, t4),
+      least_one_6: least_one_6?(t3, t4),
+      least_one_7: least_one_7?(t3, t4),
+      least_one_8: least_one?(t3, t4, 8),
+      both_5: both_5?(t3, t4),
+      both_5_6: both_5?(t3, t4) && least_one_6?(t3, t4),
+      both_6: both?(t3, t4, 6)
     }
   end
 
