@@ -1,10 +1,30 @@
-class Strategy
+class Tactic
+  COPPER = :c
+  SILVER = :s
+  ESTATE = :e
+  ACTION = :a
+
   # gen_decks returns deck of 2nd lap
   #
   # @return [Array<Symbol>]
   #
   def gen_decks
     raise NotImplementedError
+  end
+
+  module GenDecksBySilverAndAction
+    def gen_decks
+      (0...12).to_a.permutation(3 + 1 + 1).map do |indices|
+        deck = Array.new(12) { COPPER }
+        e1, e2, e3, s, a = *indices
+        deck[e1] = ESTATE
+        deck[e2] = ESTATE
+        deck[e3] = ESTATE
+        deck[s] = SILVER
+        deck[a] = ACTION
+        deck
+      end
+    end
   end
 
   # split_to_hands split deck to 2nd lap hands
