@@ -12,21 +12,6 @@ class Tactic
     raise NotImplementedError
   end
 
-  module GenDecksBySilverAndAction
-    def gen_decks
-      (0...12).to_a.permutation(3 + 1 + 1).map do |indices|
-        deck = Array.new(12) { COPPER }
-        e1, e2, e3, s, a = *indices
-        deck[e1] = ESTATE
-        deck[e2] = ESTATE
-        deck[e3] = ESTATE
-        deck[s] = SILVER
-        deck[a] = ACTION
-        deck
-      end
-    end
-  end
-
   # split_to_hands split deck to 2nd lap hands
   #
   # @param [Array<Symbol>] deck
@@ -82,6 +67,21 @@ class Tactic
     topics.each do |topic, text|
       count = results.count { |r| r[topic] }
       puts "- #{text}: #{(count / all.to_f * 100).round(2)}%"
+    end
+  end
+end
+
+module GenDecksBySilverAndAction
+  def gen_decks
+    (0...12).to_a.permutation(3 + 1 + 1).map do |indices|
+      deck = Array.new(12) { Tactic::COPPER }
+      e1, e2, e3, s, a = *indices
+      deck[e1] = Tactic::ESTATE
+      deck[e2] = Tactic::ESTATE
+      deck[e3] = Tactic::ESTATE
+      deck[s] = Tactic::SILVER
+      deck[a] = Tactic::ACTION
+      deck
     end
   end
 end
