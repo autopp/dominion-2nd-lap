@@ -1,10 +1,6 @@
 require_relative 'tactic'
 
 class Castle < Tactic
-  def split_to_hands(deck)
-    [deck[0...5], deck[5...10]]
-  end
-
   include SimulateTurnWithSilverOnly
 
   def simulate(deck)

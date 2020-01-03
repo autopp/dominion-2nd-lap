@@ -167,10 +167,10 @@ class Tactic
   #
   # @param [Array<Symbol>] deck
   #
-  # @return [Array(Array<Symbol>, Array<Symbol>, Array<Symbol>)]
+  # @return [Array(Array<Symbol>, Array<Symbol>)]
   #
   def split_to_hands(deck)
-    [deck[0...5], deck[5...10], deck[10...12]]
+    [deck[0...5], deck[5...10]]
   end
 
   # simulate_turn simulates each turn and return results as Hash
