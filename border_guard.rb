@@ -103,8 +103,8 @@ class BorderGuardWithSilver < BorderGuard
 
   def topics
     {
-      at_least_once_5: '一度でも5金以上が出る確率',
-      at_least_once_6: '一度でも6金が出る確率'
+      **topic_for_at_least_once_5,
+      **topic_for_at_least_once_6(geq: false)
     }
   end
 end
@@ -132,7 +132,7 @@ class BorderGuardWithSalvager < BorderGuard
   def simulate_turn(hand)
     coin = 0
     use = false
-    trashed_estate = false
+    trashing_estate = false
     hand.each do |card|
       case card
       when COPPER
@@ -141,14 +141,14 @@ class BorderGuardWithSalvager < BorderGuard
         use = true
         if hand.include?(ESTATE)
           coin += 2
-          trashed_estate = true
+          trashing_estate = true
         end
       end
     end
 
-    over4_buy2 = trashed_estate && coin >= 4
+    over4_buy2 = trashing_estate && coin >= 4
 
-    { coin: coin, trashed_estate: trashed_estate, over4_buy2: over4_buy2 }
+    { coin: coin, trashing_estate: trashing_estate, over4_buy2: over4_buy2 }
   end
 
   def simulate(deck)
@@ -158,17 +158,17 @@ class BorderGuardWithSalvager < BorderGuard
 
     {
       at_least_once_5: at_least_once_5?(t3, t4),
-      trashed_estate: or_for(t3, t4, :trashed_estate),
-      trashed_estate_at_least_once_5: or_for(t3, t4, :trashed_estate) && at_least_once_5?(t3, t4),
+      trashing_estate: or_for(t3, t4, :trashing_estate),
+      trashing_estate_and_at_least_once_5: or_for(t3, t4, :trashing_estate) && at_least_once_5?(t3, t4),
       over4_buy2: or_for(t3, t4, :over4_buy2)
     }
   end
 
   def topics
     {
-      at_least_once_5: '一度でも5金以上が出る確率',
-      trashed_estate: '屋敷を廃棄できる確率',
-      trashed_estate_at_least_once_5: '屋敷を廃棄しつつ一度でも5金以上が出る確率',
+      **topic_for_at_least_once_5,
+      **topic_for_trashing_estate,
+      **topic_for_trashing_estate_and_at_least_once_5,
       over4_buy2: '4金以上2購入が出る確率'
     }
   end
@@ -230,11 +230,11 @@ class BorderGuardWithBaron < BorderGuard
 
   def topics
     {
-      at_least_once_5: '一度でも5金以上が出る確率',
-      at_least_once_6: '一度でも6金以上が出る確率',
-      at_least_once_7: '一度でも7金が出る確率',
-      both_5: '両ターン共に5金以上が出る確率',
-      both_5_and_at_least_once_6: '両ターン共に5金以上を出し、かつ一度でも6金以上が出る確率',
+      **topic_for_at_least_once_5,
+      **topic_for_at_least_once_6,
+      **topic_for_at_least_once(7, geq: false),
+      **topic_for_both_5,
+      **topic_for_both_and_at_least_once(5, 6, geq: false),
       neet: '男爵が沈む、あるいはニート男爵になる確率'
     }
   end

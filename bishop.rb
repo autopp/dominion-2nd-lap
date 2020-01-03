@@ -5,7 +5,7 @@ class BishopTactic < Tactic
 
   def simulate_turn(hand, **_opts)
     coin = 0
-    trashed_estate = false
+    trashing_estate = false
     hand.each do |card|
       case card
       when COPPER
@@ -16,10 +16,10 @@ class BishopTactic < Tactic
     end
 
     if hand.member?(ACTION) && hand.member?(ESTATE)
-      trashed_estate = true
+      trashing_estate = true
       coin += 1
     end
-    { coin: coin, trashed_estate: trashed_estate }
+    { coin: coin, trashing_estate: trashing_estate }
   end
 
   def simulate(deck)
@@ -30,18 +30,18 @@ class BishopTactic < Tactic
       at_least_once_5: at_least_once_5?(t3, t4),
       at_least_once_6: at_least_once_6?(t3, t4),
       both_5: both_5?(t3, t4),
-      trashed_estate: or_for(t3, t4, :trashed_estate),
-      trashed_estate_at_least_once_5: or_for(t3, t4, :trashed_estate) && at_least_once_5?(t3, t4)
+      trashing_estate: or_for(t3, t4, :trashing_estate),
+      trashing_estate_at_least_once_5: or_for(t3, t4, :trashing_estate) && at_least_once_5?(t3, t4)
     }
   end
 
   def topics
     {
-      at_least_once_5: '一度でも5金以上が出る確率',
-      at_least_once_6: '一度でも6金が出る確率',
-      both_5: '両方とも5金以上が出る確率',
-      trashed_estate: '屋敷を廃棄できる確率',
-      trashed_estate_at_least_once_5: '屋敷を廃棄しつつ1度でも5金以上が出る確率'
+      **topic_for_at_least_once_5,
+      **topic_for_at_least_once_6(geq: false),
+      **topic_for_both_5,
+      **topic_for_trashing_estate,
+      **topic_for_trashing_and_at_least_once_5
     }
   end
 end

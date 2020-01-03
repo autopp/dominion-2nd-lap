@@ -1,3 +1,47 @@
+module CommonTopics
+  def topic_for_at_least_once(coin, geq: true)
+    { "at_least_once_#{coin}": "一度でも#{coin}金#{geq ? '以上' : ''}が出る確率" }
+  end
+
+  def topic_for_at_least_once_5(geq: true)
+    topic_for_at_least_once(5, geq: geq)
+  end
+
+  def topic_for_at_least_once_6(geq: true)
+    topic_for_at_least_once(6, geq: geq)
+  end
+
+  def topic_for_at_least_once_7(geq: true)
+    topic_for_at_least_once(7, geq: geq)
+  end
+
+  def topic_for_both(coin, geq: true)
+    { "both_#{coin}": "両ターン共に#{coin}金#{geq ? '以上' : ''}が出る確率" }
+  end
+
+  def topic_for_both_5(geq: true)
+    topic_for_both(5, geq: geq)
+  end
+
+  def topic_for_both_and_at_least_once(both_coin, at_least_once_coin, geq: true)
+    key = :"both_#{both_coin}_and_at_least_once_#{at_least_once_coin}"
+    text = "両方とも#{both_coin}金を出し、かつ一度でも#{at_least_once_coin}金#{geq ? '以上' : '' }を出せる確率"
+    { key => text }
+  end
+
+  def topic_for_trashing_estate
+    { trashing_estate: '屋敷を廃棄できる確率' }
+  end
+
+  def topic_for_trashing_estate_and_at_least_once(coin, geq: true)
+    { "trashing_estate_and_at_least_once_#{coin}": "屋敷を廃棄しつつ1度でも#{coin}金#{geq ? '以上' : ''}が出る確率" }
+  end
+
+  def topic_for_trashing_estate_and_at_least_once_5(geq: true)
+    topic_for_trashing_estate_and_at_least_once(5, geq: geq)
+  end
+end
+
 class Tactic
   # @return [Symbol]
   COPPER = :c
@@ -7,6 +51,8 @@ class Tactic
   ESTATE = :e
   # @return [Symbol]
   ACTION = :a
+
+  include CommonTopics
 
   # gen_decks returns deck of 2nd lap
   #

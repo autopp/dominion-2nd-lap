@@ -36,13 +36,13 @@ class CoppersmithTactic < Tactic
 
   def topics
     {
-      at_least_once_5: '一度でも5金を出せる確率',
-      at_least_once_6: '一度でも6金を出せる確率',
-      at_least_once_7: '一度でも7金を出せる確率',
-      at_least_once_8: '一度でも8金を出せる確率',
-      both_5: '両方とも5金を出せる確率',
+      **topic_for_at_least_once_5,
+      **topic_for_at_least_once_6,
+      **topic_for_at_least_once_7,
+      **topic_for_at_least_once(8, geq: false),
+      **topic_for_both_5,
       both_5_6: '両方とも5金を出し、かつ一度でも6金を出せる確率',
-      both_6: '両方とも6金を出せる確率'
+      **topic_for_both(6, geq: false)
     }
   end
 end
