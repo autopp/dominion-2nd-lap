@@ -119,14 +119,12 @@ class BorderGuardWithSalvager < BorderGuard
 
   def simulate_turn(hand)
     coin = 0
-    use = false
     trashing_estate = false
     hand.each do |card|
       case card
       when COPPER
         coin += 1
       when SALVAGER
-        use = true
         if hand.include?(ESTATE)
           coin += 2
           trashing_estate = true
