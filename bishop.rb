@@ -1,7 +1,7 @@
 require_relative 'tactic'
 
 class BishopTactic < Tactic
-  include GenDecksBySilverAndAction
+  include GenDecksWithSilverAndAction
 
   def simulate_turn(hand, **_opts)
     coin = 0

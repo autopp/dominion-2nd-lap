@@ -222,7 +222,7 @@ class Tactic
   end
 end
 
-module GenDecksBySilverAndAction
+module GenDecksWithSilverAndAction
   def gen_decks
     (0...12).to_a.permutation(3 + 1 + 1).map do |indices|
       deck = Array.new(12) { Tactic::COPPER }

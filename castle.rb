@@ -23,7 +23,7 @@ end
 class CastleAndSilver < Castle
   def gen_decks
     (0...11).to_a.permutation(3).map do |others|
-      deck = Array.new(11) { :c }
+      deck = Array.new(11) { COPPER }
       deck[others[0]] = ESTATE
       deck[others[1]] = ESTATE
       deck[others[2]] = SILVER
@@ -43,7 +43,7 @@ end
 class DoubleCastle < Castle
   def gen_decks
     (0...11).to_a.permutation(2).map do |others|
-      deck = Array.new(11) { :c }
+      deck = Array.new(11) { COPPER }
       deck[others[0]] = ESTATE
       deck[others[1]] = ESTATE
       deck
