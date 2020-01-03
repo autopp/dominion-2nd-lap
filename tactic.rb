@@ -173,6 +173,22 @@ class Tactic
     [deck[0...5], deck[5...10]]
   end
 
+  # patterns_of_lap creates patterns for each deck with additional infomation
+  #
+  # Default implemention returns with no factor and no opts
+  #
+  # @param [Array(Array<Symbol>, Array<Symbol>)] deck deck created by split_to_hands
+  #
+  # @return [Array<Hash>]
+  #   * :factor [Integer] factor of this pattern
+  #   * :opts [Hash<Symbol, Object>] additional infomation to pass to simulate_turn
+  #
+  def patterns_of_each_deck
+    [
+      { factor: 1, opts: {} }
+    ]
+  end
+
   # simulate_turn simulates each turn and return results as Hash
   #
   # @param [Array<Symbol>] hand hand of this turn
@@ -191,7 +207,7 @@ class Tactic
   #
   # @return [Hash<Symbol, Boolean>]
   #
-  def simulate(_deck)
+  def simulate(_deck, **_opts)
     raise NotImplementedError
   end
 
@@ -201,7 +217,12 @@ class Tactic
   #
   def simulate_all
     decks = gen_decks
-    decks.map { |deck| simulate(split_to_hands(deck)) }
+    patterns = patterns_of_each_deck
+    decks.flat_map do |deck|
+      patterns.map do |pattern|
+        { results: simulate(split_to_hands(deck), **pattern[:opts]), factor: pattern[:factor] }
+      end
+    end
   end
 
   # topics returns items of repot
@@ -213,10 +234,10 @@ class Tactic
   end
 
   def report
-    results = simulate_all
-    all = results.size
+    all_patterns = simulate_all
+    all = all_patterns.sum { |pattern| pattern[:factor] }
     topics.each do |topic, text|
-      count = results.count { |r| r[topic] }
+      count = all_patterns.sum { |pattern| pattern[:results][topic] ? pattern[:factor] : 0 }
       puts "- #{text}: #{(count / all.to_f * 100).round(2)}%"
     end
   end
