@@ -27,21 +27,21 @@ class BishopTactic < Tactic
     t3 = simulate_turn(hand3)
     t4 = simulate_turn(hand4)
     {
-      least_one_5: least_one_5?(t3, t4),
-      least_one_6: least_one_6?(t3, t4),
+      at_least_once_5: at_least_once_5?(t3, t4),
+      at_least_once_6: at_least_once_6?(t3, t4),
       both_5: both_5?(t3, t4),
       trashed_estate: or_for(t3, t4, :trashed_estate),
-      trashed_estate_least_one_5: or_for(t3, t4, :trashed_estate) && least_one_5?(t3, t4)
+      trashed_estate_at_least_once_5: or_for(t3, t4, :trashed_estate) && at_least_once_5?(t3, t4)
     }
   end
 
   def topics
     {
-      least_one_5: '一度でも5金以上が出る確率',
-      least_one_6: '一度でも6金が出る確率',
+      at_least_once_5: '一度でも5金以上が出る確率',
+      at_least_once_6: '一度でも6金が出る確率',
       both_5: '両方とも5金以上が出る確率',
       trashed_estate: '屋敷を廃棄できる確率',
-      trashed_estate_least_one_5: '屋敷を廃棄しつつ1度でも5金以上が出る確率'
+      trashed_estate_at_least_once_5: '屋敷を廃棄しつつ1度でも5金以上が出る確率'
     }
   end
 end

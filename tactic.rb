@@ -84,20 +84,20 @@ class Tactic
     t3[key] && t4[key]
   end
 
-  def least_one?(t3, t4, border)
+  def at_least_once?(t3, t4, border)
     t3[:coin] >= border || t4[:coin] >= border
   end
 
-  def least_one_5?(t3, t4)
-    least_one?(t3, t4, 5)
+  def at_least_once_5?(t3, t4)
+    at_least_once?(t3, t4, 5)
   end
 
-  def least_one_6?(t3, t4)
-    least_one?(t3, t4, 6)
+  def at_least_once_6?(t3, t4)
+    at_least_once?(t3, t4, 6)
   end
 
-  def least_one_7?(t3, t4)
-    least_one?(t3, t4, 7)
+  def at_least_once_7?(t3, t4)
+    at_least_once?(t3, t4, 7)
   end
 
   def both?(t3, t4, border)

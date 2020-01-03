@@ -24,22 +24,22 @@ class CoppersmithTactic < Tactic
     t4 = simulate_turn(hand4)
 
     {
-      least_one_5: least_one_5?(t3, t4),
-      least_one_6: least_one_6?(t3, t4),
-      least_one_7: least_one_7?(t3, t4),
-      least_one_8: least_one?(t3, t4, 8),
+      at_least_once_5: at_least_once_5?(t3, t4),
+      at_least_once_6: at_least_once_6?(t3, t4),
+      at_least_once_7: at_least_once_7?(t3, t4),
+      at_least_once_8: at_least_once?(t3, t4, 8),
       both_5: both_5?(t3, t4),
-      both_5_6: both_5?(t3, t4) && least_one_6?(t3, t4),
+      both_5_6: both_5?(t3, t4) && at_least_once_6?(t3, t4),
       both_6: both?(t3, t4, 6)
     }
   end
 
   def topics
     {
-      least_one_5: '一度でも5金を出せる確率',
-      least_one_6: '一度でも6金を出せる確率',
-      least_one_7: '一度でも7金を出せる確率',
-      least_one_8: '一度でも8金を出せる確率',
+      at_least_once_5: '一度でも5金を出せる確率',
+      at_least_once_6: '一度でも6金を出せる確率',
+      at_least_once_7: '一度でも7金を出せる確率',
+      at_least_once_8: '一度でも8金を出せる確率',
       both_5: '両方とも5金を出せる確率',
       both_5_6: '両方とも5金を出し、かつ一度でも6金を出せる確率',
       both_6: '両方とも6金を出せる確率'
