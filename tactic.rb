@@ -242,9 +242,9 @@ module SimulateTurnWithSilverOnly
     coin = 0
     hand.each do |card|
       case card
-      when COPPER
+      when Tactic::COPPER
         coin += 1
-      when SILVER
+      when Tactic::SILVER
         coin += 2
       end
     end
