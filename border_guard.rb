@@ -45,7 +45,7 @@ class BorderGuard < Tactic
   #
   # @return [Array<Symbol>]
   #
-  def choose_border_guard(hand)
+  def choose_border_guard(_hand)
     raise NotImplementedError
   end
 

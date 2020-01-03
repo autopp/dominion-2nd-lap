@@ -125,7 +125,7 @@ module CommonTopics
 
   def topic_for_both_and_at_least_once(both_coin, at_least_once_coin, geq: true)
     key = :"both_#{both_coin}_and_at_least_once_#{at_least_once_coin}"
-    text = "両ターン共に#{both_coin}金が出て、かつ一度でも#{at_least_once_coin}金#{geq ? '以上' : '' }が出る確率"
+    text = "両ターン共に#{both_coin}金が出て、かつ一度でも#{at_least_once_coin}金#{geq ? '以上' : ''}が出る確率"
     { key => text }
   end
 
@@ -181,7 +181,7 @@ class Tactic
   # @return [Hash] result
   #   * :coin [Integer] coin of this turn
   #
-  def simulate_turn(hand, **opts)
+  def simulate_turn(_hand, **_opts)
     raise NotImplementedError
   end
 
@@ -191,7 +191,7 @@ class Tactic
   #
   # @return [Hash<Symbol, Boolean>]
   #
-  def simulate(deck)
+  def simulate(_deck)
     raise NotImplementedError
   end
 
