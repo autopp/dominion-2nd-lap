@@ -1,7 +1,11 @@
 class Tactic
+  # @return [Symbol]
   COPPER = :c
+  # @return [Symbol]
   SILVER = :s
+  # @return [Symbol]
   ESTATE = :e
+  # @return [Symbol]
   ACTION = :a
 
   # gen_decks returns deck of 2nd lap
