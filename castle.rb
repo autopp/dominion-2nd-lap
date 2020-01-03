@@ -5,18 +5,7 @@ class Castle < Tactic
     [deck[0...5], deck[5...10]]
   end
 
-  def simulate_turn(hand)
-    coin = 0
-    hand.each do |card|
-      case card
-      when COPPER
-        coin += 1
-      when SILVER
-        coin += 2
-      end
-    end
-    { coin: coin }
-  end
+  include SimulateTurnWithSilverOnly
 
   def simulate(deck)
     hand3, hand4 = deck

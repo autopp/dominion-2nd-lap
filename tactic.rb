@@ -236,3 +236,18 @@ module GenDecksBySilverAndAction
     end
   end
 end
+
+module SimulateTurnWithSilverOnly
+  def simulate_turn(hand)
+    coin = 0
+    hand.each do |card|
+      case card
+      when COPPER
+        coin += 1
+      when SILVER
+        coin += 2
+      end
+    end
+    { coin: coin }
+  end
+end
