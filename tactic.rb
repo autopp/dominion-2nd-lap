@@ -1,3 +1,103 @@
+module CommonResults
+  # predicate
+
+  def any?(t3, t4, key)
+    raise KeyError, "turn3 dose not contain #{key.inspect}" if !t3.include?(key)
+    raise KeyError, "turn4 dose not contain #{key.inspect}" if !t4.include?(key)
+
+    t3[key] || t4[key]
+  end
+
+  def all?(t3, t4, key)
+    raise KeyError, "turn3 dose not contain #{key.inspect}" if !t3.include?(key)
+    raise KeyError, "turn4 dose not contain #{key.inspect}" if !t4.include?(key)
+
+    t3[key] && t4[key]
+  end
+
+  def at_least_once?(t3, t4, coin)
+    raise KeyError, 'turn3 dose not contain :coin' if !t3.include?(:coin)
+    raise KeyError, 'turn4 dose not contain :coin' if !t4.include?(:coin)
+
+    t3[:coin] >= coin || t4[:coin] >= coin
+  end
+
+  def at_least_once_5?(t3, t4)
+    at_least_once?(t3, t4, 5)
+  end
+
+  def at_least_once_6?(t3, t4)
+    at_least_once?(t3, t4, 6)
+  end
+
+  def at_least_once_7?(t3, t4)
+    at_least_once?(t3, t4, 7)
+  end
+
+  def both?(t3, t4, coin)
+    t3[:coin] >= coin && t4[:coin] >= coin
+  end
+
+  def both_5?(t3, t4)
+    both?(t3, t4, 5)
+  end
+
+  def trashing_estate?(t3, t4)
+    any?(t3, t4, :trashing_estate)
+  end
+
+  # result_of_xxx
+
+  def result_of_any(t3, t4, key)
+    { key => any?(t3, t4, key) }
+  end
+
+  def result_of_all(t3, t4, key)
+    { key => all?(t3, t4, key) }
+  end
+
+  def result_of_at_least_once(t3, t4, coin)
+    { "at_least_once_#{coin}": at_least_once?(t3, t4, coin) }
+  end
+
+  def result_of_at_least_once_5(t3, t4)
+    result_of_at_least_once(t3, t4, 5)
+  end
+
+  def result_of_at_least_once_6(t3, t4)
+    result_of_at_least_once(t3, t4, 6)
+  end
+
+  def result_of_at_least_once_7(t3, t4)
+    result_of_at_least_once(t3, t4, 7)
+  end
+
+  def result_of_both(t3, t4, coin)
+    { "both_#{coin}": both?(t3, t4, coin) }
+  end
+
+  def result_of_both_5(t3, t4)
+    result_of_both(t3, t4, 5)
+  end
+
+  def result_of_both_and_at_least_once(t3, t4, both_coin, at_least_once_coin)
+    key = :"both_#{both_coin}_and_at_least_once_#{at_least_once_coin}"
+    { key => both?(t3, t4, both_coin) && at_least_once?(t3, t4, at_least_once_coin) }
+  end
+
+  def result_of_trashing_estate(t3, t4)
+    result_of_any(t3, t4, :trashing_estate)
+  end
+
+  def result_of_trashing_estate_and_at_least_once(t3, t4, coin)
+    { "trashing_estate_and_at_least_once_#{coin}": trashing_estate?(t3, t4) && at_least_once?(t3, t4, coin) }
+  end
+
+  def result_of_trashing_estate_and_at_least_once_5(t3, t4)
+    result_of_trashing_estate_and_at_least_once(t3, t4, 5)
+  end
+end
+
 module CommonTopics
   def topic_for_at_least_once(coin, geq: true)
     { "at_least_once_#{coin}": "一度でも#{coin}金#{geq ? '以上' : ''}が出る確率" }
@@ -25,7 +125,7 @@ module CommonTopics
 
   def topic_for_both_and_at_least_once(both_coin, at_least_once_coin, geq: true)
     key = :"both_#{both_coin}_and_at_least_once_#{at_least_once_coin}"
-    text = "両方とも#{both_coin}金を出し、かつ一度でも#{at_least_once_coin}金#{geq ? '以上' : '' }を出せる確率"
+    text = "両ターン共に#{both_coin}金が出て、かつ一度でも#{at_least_once_coin}金#{geq ? '以上' : '' }が出る確率"
     { key => text }
   end
 
@@ -52,6 +152,7 @@ class Tactic
   # @return [Symbol]
   ACTION = :a
 
+  include CommonResults
   include CommonTopics
 
   # gen_decks returns deck of 2nd lap
@@ -118,40 +219,6 @@ class Tactic
       count = results.count { |r| r[topic] }
       puts "- #{text}: #{(count / all.to_f * 100).round(2)}%"
     end
-  end
-
-  # Helpers
-
-  def or_for(t3, t4, key)
-    t3[key] || t4[key]
-  end
-
-  def and_for(t3, t4, key)
-    t3[key] && t4[key]
-  end
-
-  def at_least_once?(t3, t4, border)
-    t3[:coin] >= border || t4[:coin] >= border
-  end
-
-  def at_least_once_5?(t3, t4)
-    at_least_once?(t3, t4, 5)
-  end
-
-  def at_least_once_6?(t3, t4)
-    at_least_once?(t3, t4, 6)
-  end
-
-  def at_least_once_7?(t3, t4)
-    at_least_once?(t3, t4, 7)
-  end
-
-  def both?(t3, t4, border)
-    t3[:coin] >= border && t4[:coin] >= border
-  end
-
-  def both_5?(t3, t4)
-    both?(t3, t4, 5)
   end
 end
 

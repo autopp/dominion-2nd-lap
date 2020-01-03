@@ -27,11 +27,11 @@ class BishopTactic < Tactic
     t3 = simulate_turn(hand3)
     t4 = simulate_turn(hand4)
     {
-      at_least_once_5: at_least_once_5?(t3, t4),
-      at_least_once_6: at_least_once_6?(t3, t4),
-      both_5: both_5?(t3, t4),
-      trashing_estate: or_for(t3, t4, :trashing_estate),
-      trashing_estate_at_least_once_5: or_for(t3, t4, :trashing_estate) && at_least_once_5?(t3, t4)
+      **result_of_at_least_once_5(t3, t4),
+      **result_of_at_least_once_6(t3, t4),
+      **result_of_both_5(t3, t4),
+      **result_of_trashing_estate(t3, t4),
+      **result_of_trashing_estate_and_at_least_once_5(t3, t4)
     }
   end
 
@@ -41,7 +41,7 @@ class BishopTactic < Tactic
       **topic_for_at_least_once_6(geq: false),
       **topic_for_both_5,
       **topic_for_trashing_estate,
-      **topic_for_trashing_and_at_least_once_5
+      **topic_for_trashing_estate_and_at_least_once_5
     }
   end
 end
