@@ -260,6 +260,23 @@ module GenDecksWithSilverAndAction
   end
 end
 
+module GenDecksWithDoubleSilver
+  def gen_decks
+    indices = (0...12).to_a
+    indices.combination(3).map.flat_map do |estates|
+      (indices - estates).combination(2).map do |silvers|
+        deck = Array.new(12) { Tactic::COPPER }
+        deck[estates[0]] = Tactic::ESTATE
+        deck[estates[1]] = Tactic::ESTATE
+        deck[estates[2]] = Tactic::ESTATE
+        deck[silvers[0]] = Tactic::SILVER
+        deck[silvers[1]] = Tactic::SILVER
+        deck
+      end
+    end
+  end
+end
+
 module SimulateTurnWithSilverOnly
   def simulate_turn(hand)
     coin = 0
