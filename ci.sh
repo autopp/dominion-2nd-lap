@@ -7,7 +7,7 @@ files=$(git ls-files '*.rb')
 echo Execute script
 for file in $files; do
   echo $file
-  ruby $file
+  time ruby $file
   echo
 done
 
