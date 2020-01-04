@@ -143,25 +143,39 @@ module TopicHelper
 end
 
 module GenDecksHelper
+  class DeckFactory
+    def initialize(size, estates)
+      @size = size
+      @estates = estates
+    end
+
+    def new_deck
+      deck = Array.new(@size) { Tactic::COPPER }
+      @estates.each do |i|
+        deck[i] = Tactic::ESTATE
+      end
+      yield deck
+      deck
+    end
+  end
+
   def with_combination_of_estates(size, num_of_estate: 3)
     indices = (0...size).to_a
     indices.combination(num_of_estate).flat_map do |estates|
-      yield estates, indices - estates
+      factory = DeckFactory.new(size, estates)
+      yield factory, indices - estates
     end
   end
 end
 
 module GenDecksWithSilverAndAction
   def gen_decks
-    with_combination_of_estates(12) do |estates, other_indices|
+    with_combination_of_estates(12) do |factory, other_indices|
       other_indices.permutation(2).map do |(silver, action)|
-        deck = Array.new(12) { Tactic::COPPER }
-        deck[estates[0]] = Tactic::ESTATE
-        deck[estates[1]] = Tactic::ESTATE
-        deck[estates[2]] = Tactic::ESTATE
-        deck[silver] = Tactic::SILVER
-        deck[action] = Tactic::ACTION
-        deck
+        factory.new_deck do |deck|
+          deck[silver] = Tactic::SILVER
+          deck[action] = Tactic::ACTION
+        end
       end
     end
   end
@@ -169,15 +183,12 @@ end
 
 module GenDecksWithDoubleSilver
   def gen_decks
-    with_combination_of_estates(12) do |estates, other_indices|
+    with_combination_of_estates(12) do |factory, other_indices|
       other_indices.combination(2).map do |silvers|
-        deck = Array.new(12) { Tactic::COPPER }
-        deck[estates[0]] = Tactic::ESTATE
-        deck[estates[1]] = Tactic::ESTATE
-        deck[estates[2]] = Tactic::ESTATE
-        deck[silvers[0]] = Tactic::SILVER
-        deck[silvers[1]] = Tactic::SILVER
-        deck
+        factory.new_deck do |deck|
+          deck[silvers[0]] = Tactic::SILVER
+          deck[silvers[1]] = Tactic::SILVER
+        end
       end
     end
   end

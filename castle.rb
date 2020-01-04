@@ -18,14 +18,11 @@ end
 
 class CastleAndSilver < Castle
   def gen_decks
-    indices = (0...11).to_a
-    indices.combination(2).flat_map do |estates|
-      (indices - estates).map do |silver|
-        deck = Array.new(11) { COPPER }
-        deck[estates[0]] = ESTATE
-        deck[estates[1]] = ESTATE
-        deck[silver] = SILVER
-        deck
+    with_combination_of_estates(11, num_of_estate: 2) do |factory, other_indices|
+      other_indices.map do |silver|
+        factory.new_deck do |deck|
+          deck[silver] = SILVER
+        end
       end
     end
   end
