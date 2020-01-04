@@ -183,7 +183,7 @@ class Tactic
   #   * :factor [Integer] factor of this pattern
   #   * :opts [Hash<Symbol, Object>] additional infomation to pass to simulate_turn
   #
-  def patterns_of_each_deck
+  def patterns_of_deck
     [
       { factor: 1, opts: {} }
     ]
@@ -217,7 +217,7 @@ class Tactic
   #
   def simulate_all
     decks = gen_decks
-    patterns = patterns_of_each_deck
+    patterns = patterns_of_deck
     decks.flat_map do |deck|
       patterns.map do |pattern|
         { results: simulate(split_to_hands(deck), **pattern[:opts]), factor: pattern[:factor] }
