@@ -12,14 +12,17 @@ class BorderGuard < Tactic
   end
 
   def gen_decks
-    (0...12).to_a.permutation(5).map do |others|
-      deck = Array.new(12) { :c }
-      deck[others[0]] = ESTATE
-      deck[others[1]] = ESTATE
-      deck[others[2]] = ESTATE
-      deck[others[3]] = BG
-      deck[others[4]] = partner
-      deck
+    indices = (0...12).to_a
+    indices.combination(3).flat_map do |estates|
+      (indices - estates).permutation(2).map do |others|
+        deck = Array.new(12) { :c }
+        deck[estates[0]] = ESTATE
+        deck[estates[1]] = ESTATE
+        deck[estates[2]] = ESTATE
+        deck[others[0]] = BG
+        deck[others[1]] = partner
+        deck
+      end
     end
   end
 
