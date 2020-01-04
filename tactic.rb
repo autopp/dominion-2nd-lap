@@ -245,15 +245,17 @@ end
 
 module GenDecksWithSilverAndAction
   def gen_decks
-    (0...12).to_a.permutation(3 + 1 + 1).map do |indices|
-      deck = Array.new(12) { Tactic::COPPER }
-      e1, e2, e3, s, a = *indices
-      deck[e1] = Tactic::ESTATE
-      deck[e2] = Tactic::ESTATE
-      deck[e3] = Tactic::ESTATE
-      deck[s] = Tactic::SILVER
-      deck[a] = Tactic::ACTION
-      deck
+    indices = (0...12).to_a
+    indices.combination(3).map.flat_map do |estates|
+      (indices - estates).permutation(2).map do |(silver, action)|
+        deck = Array.new(12) { Tactic::COPPER }
+        deck[estates[0]] = Tactic::ESTATE
+        deck[estates[1]] = Tactic::ESTATE
+        deck[estates[2]] = Tactic::ESTATE
+        deck[silver] = Tactic::SILVER
+        deck[action] = Tactic::ACTION
+        deck
+      end
     end
   end
 end
