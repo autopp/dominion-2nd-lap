@@ -1,6 +1,6 @@
 require_relative 'tactic'
 
-class CoppersmithTactic < Tactic
+class Coppersmith < Tactic
   include GenDecksWithSilverAndAction
 
   def simulate_turn(hand, **_opts)
@@ -47,4 +47,4 @@ class CoppersmithTactic < Tactic
   end
 end
 
-CoppersmithTactic.new.report
+Coppersmith.new.report
