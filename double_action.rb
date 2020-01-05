@@ -34,7 +34,7 @@ class DoubleAction < Tactic
       end
     end
 
-    if coin_action && draw_action
+    if coin_action > 0 && draw_action
       if necropolis
         coin += 2
         played = 2
@@ -112,7 +112,7 @@ end
 class DoubleCoinAction < DoubleAction
   def gen_decks
     with_combination_of_estates(12) do |factory, other_indices|
-      other_indices.permutation(2).map do |(action1, action2)|
+      other_indices.combination(2).map do |(action1, action2)|
         factory.new_deck do |deck|
           deck[action1] = COIN_ACTION
           deck[action2] = COIN_ACTION
