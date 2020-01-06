@@ -5,99 +5,6 @@ class DoubleAction < Tactic
   COIN_ACTION = :coin
   NECROPOLIS = :necropolis
 
-  def gen_decks
-    NotImplementedError
-  end
-
-  def split_to_hands(deck)
-    deck
-  end
-
-  def simulate_turn(hand, drawn)
-    coin = 0
-    necropolis = false
-    coin_action = 0
-    draw_action = false
-    played = 0
-    doubled = false
-    drew = false
-    hand.each do |card|
-      case card
-      when COPPER
-        coin += 1
-      when NECROPOLIS
-        necropolis = true
-      when COIN_ACTION
-        coin_action += 1
-      when DRAW_ACTION
-        draw_action = true
-      end
-    end
-
-    if coin_action > 0 && draw_action
-      if necropolis
-        coin += 2
-        played = 2
-        drew = true
-      else
-        played = 1
-        doubled = true
-        if coin + 2 >= 5
-          coin += 2
-        else
-          drew = true
-        end
-      end
-    elsif coin_action == 1
-      coin += 2
-      played = 1
-    elsif coin_action == 2
-      if necropolis
-        coin += 4
-        played = 2
-      else
-        coin += 2
-        played = 1
-        doubled = true
-      end
-    elsif draw_action
-      drew = true
-      played = 1
-    end
-
-    if drew
-      drawn.each do |card|
-        case card
-        when COPPER
-          coin += 1
-        when COIN_ACTION
-          if necropolis
-            coin += 2
-            played = 2
-          else
-            doubled = true
-          end
-        end
-      end
-    end
-
-    { coin: coin, drew: drew, played: played, doubled: doubled }
-  end
-
-  def simulate(deck)
-    t3 = simulate_turn(deck[0...5], deck[5...7])
-    hand4, drawn4 = t3[:drew] ? [deck[7...12], []] : [deck[5...10], deck[10...12]]
-    t4 = simulate_turn(hand4, drawn4)
-
-    {
-      **result_of_at_least_once_5(t3, t4),
-      **result_of_at_least_once_6(t3, t4),
-      **result_of_both_5(t3, t4),
-      both_action: t3[:played] + t4[:played] == 2,
-      doubled: any?(t3, t4, :doubled)
-    }
-  end
-
   def topics
     {
       **topic_for_at_least_once_5,
@@ -120,6 +27,38 @@ class DoubleCoinAction < DoubleAction
       end
     end
   end
+
+  def simulate_turn(hand)
+    coin = hand.count(COPPER)
+    necropolis = hand.include?(NECROPOLIS)
+    coin_actions = hand.count(COIN_ACTION)
+    doubled = coin_actions == 2 && !necropolis
+    played = case coin_actions
+    when 1
+      1
+    when 2
+      necropolis ? 2 : 1
+    else
+      0
+    end
+    coin += played * 2
+
+    { coin: coin, played: played, doubled: doubled }
+  end
+
+  def simulate(deck)
+    hand3, hand4 = deck
+    t3 = simulate_turn(hand3)
+    t4 = simulate_turn(hand4)
+
+    {
+      **result_of_at_least_once_5(t3, t4),
+      **result_of_at_least_once_6(t3, t4),
+      **result_of_both_5(t3, t4),
+      both_action: t3[:played] + t4[:played] == 2,
+      doubled: any?(t3, t4, :doubled)
+    }
+  end
 end
 
 class CoinAndDrawAction < DoubleAction
@@ -133,9 +72,49 @@ class CoinAndDrawAction < DoubleAction
       end
     end
   end
+
+  def split_to_hands(deck)
+    deck
+  end
+
+  def simulate_turn(hand, drawn)
+    use_draw = use_draw?(hand)
+    all_hand = use_draw ? hand + drawn : hand
+    doubled = doubled?(hand, all_hand)
+
+    coin = all_hand.count(COPPER)
+    coin += 2 if all_hand.include?(COIN_ACTION) && (!doubled || !use_draw)
+    played = doubled ? 1 : all_hand.count { |card| [COIN_ACTION, DRAW_ACTION].include?(card) }
+
+    { coin: coin, drew: use_draw, played: played, doubled: doubled }
+  end
+
+  def simulate(deck)
+    t3 = simulate_turn(deck[0...5], deck[5...7])
+    hand4, drawn4 = t3[:drew] ? [deck[7...12], []] : [deck[5...10], deck[10...12]]
+    t4 = simulate_turn(hand4, drawn4)
+
+    {
+      **result_of_at_least_once_5(t3, t4),
+      **result_of_at_least_once_6(t3, t4),
+      **result_of_both_5(t3, t4),
+      both_action: t3[:played] + t4[:played] == 2,
+      doubled: any?(t3, t4, :doubled)
+    }
+  end
+
+  private
+
+  def use_draw?(hand)
+    hand.include?(DRAW_ACTION) && (!hand.include?(COIN_ACTION) || hand.include?(NECROPOLIS) || hand.count(COPPER) < 3)
+  end
+
+  def doubled?(hand, all_hand)
+    !hand.include?(NECROPOLIS) && hand.include?(DRAW_ACTION) && all_hand.include?(COIN_ACTION)
+  end
 end
 
-class DoubleCoinActionWithNecropolis < DoubleAction
+class DoubleCoinActionWithNecropolis < DoubleCoinAction
   def gen_decks
     with_combination_of_estates(12, num_of_estate: 2) do |factory, other_indices|
       other_indices.permutation(3).map do |(necropolis, action1, action2)|
@@ -149,7 +128,7 @@ class DoubleCoinActionWithNecropolis < DoubleAction
   end
 end
 
-class CoinAndDrawActionWithNecropolis < DoubleAction
+class CoinAndDrawActionWithNecropolis < CoinAndDrawAction
   def gen_decks
     with_combination_of_estates(12, num_of_estate: 2) do |factory, other_indices|
       other_indices.permutation(3).map do |(necropolis, coin, draw)|
