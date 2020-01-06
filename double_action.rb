@@ -33,14 +33,7 @@ class DoubleCoinAction < DoubleAction
     necropolis = hand.include?(NECROPOLIS)
     coin_actions = hand.count(COIN_ACTION)
     doubled = coin_actions == 2 && !necropolis
-    played = case coin_actions
-    when 1
-      1
-    when 2
-      necropolis ? 2 : 1
-    else
-      0
-    end
+    played = doubled ? 1 : coin_actions
     coin += played * 2
 
     { coin: coin, played: played, doubled: doubled }
