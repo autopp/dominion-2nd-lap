@@ -25,11 +25,11 @@ class BorderGuard < Tactic
   def split_to_hands(deck)
     hands = case deck.find_index(BG)
     when 0...5
-      [choose_border_guard(deck[0...7]), deck[7...12]]
+      [choose_border_guard(deck[0...7]).sort!, deck[7...12].sort!]
     when 5...10
-      [deck[0...5], choose_border_guard(deck[5...12])]
+      [deck[0...5].sort!, choose_border_guard(deck[5...12]).sort!]
     else
-      [deck[0...5], deck[5...10]]
+      [deck[0...5].sort!, deck[5...10].sort!]
     end
 
     sum = hands.map(&:size).reduce(&:+)

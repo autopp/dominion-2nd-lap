@@ -132,9 +132,9 @@ class DeathCartAndMine < DeathCart
 end
 
 DeathCartWithSilver.new.report
-puts
-DeathCartWithSilverAndMine.new.report
-puts
-DeathCartOnly.new.report
-puts
-DeathCartAndMine.new.report
+# puts
+# DeathCartWithSilverAndMine.new.report
+# puts
+# DeathCartOnly.new.report
+# puts
+# DeathCartAndMine.new.report

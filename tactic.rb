@@ -29,7 +29,7 @@ class Tactic
   # @return [Array(Array<Symbol>, Array<Symbol>)]
   #
   def split_to_hands(deck)
-    [deck[0...5], deck[5...10]]
+    [deck[0...5].sort!, deck[5...10].sort!]
   end
 
   # patterns_of_lap creates patterns for each deck with additional infomation
@@ -75,11 +75,11 @@ class Tactic
   # @return [Array<Hash<Symbol, Boolean>>]
   #
   def simulate_all
-    decks = gen_decks
+    decks = gen_decks.map { |deck| split_to_hands(deck) }.tally
     patterns = patterns_of_deck
-    decks.flat_map do |deck|
+    decks.flat_map do |deck, count|
       patterns.map do |pattern|
-        { results: simulate(split_to_hands(deck), **pattern[:opts]), factor: pattern[:factor] }
+        { results: simulate(deck, **pattern[:opts]), factor: pattern[:factor] * count }
       end
     end
   end
