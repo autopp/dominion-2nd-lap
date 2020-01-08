@@ -43,8 +43,7 @@ class Lookout < Tactic
     at_least_once_5 = at_least_once_5?(t3, t4) # rubocop:disable Naming/VariableNumber
     cost5_in_next = at_least_once_5 && !t4[:trash]
     {
-      **result_of_at_least_once_5(t3, t4),
-      **result_of_at_least_once_6(t3, t4),
+      **result_of_at_least_onces(t3, t4, 5, 6),
       result_of_trashing_estate: trashing_estate,
       cost5_in_third_deck: at_least_once_5_and_third_deck,
       trashing_estate_and_at_least_once_5: trashing_estate && at_least_once_5,

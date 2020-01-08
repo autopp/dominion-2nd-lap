@@ -28,7 +28,7 @@ class Tactic
   #
   # @return [Array(Array<Symbol>, Array<Symbol>)]
   #
-  def split_to_hands(deck)
+  def split_to_hands(deck, **_opts)
     [deck[0...5].sort!, deck[5...10].sort!]
   end
 

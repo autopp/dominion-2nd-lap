@@ -28,9 +28,7 @@ class Cutpurse < Tactic
     t4 = simulate_turn(hand4, discarding: discarding_t4)
 
     {
-      **result_of_at_least_once_5(t3, t4),
-      **result_of_at_least_once_6(t3, t4),
-      **result_of_at_least_once_7(t3, t4),
+      **result_of_at_least_onces(t3, t4, 5, 6, 7),
       **result_of_both_5(t3, t4),
       **result_of_lost(t3, t4, 5),
       **result_of_lost(t3, t4, 6)

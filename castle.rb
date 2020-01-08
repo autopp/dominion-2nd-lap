@@ -9,8 +9,7 @@ class Castle < Tactic
     t4 = simulate_turn(hand4)
 
     {
-      **result_of_at_least_once_5(t3, t4),
-      **result_of_at_least_once_6(t3, t4),
+      **result_of_at_least_onces(t3, t4, 5, 6),
       **result_of_both_5(t3, t4)
     }
   end
@@ -47,9 +46,7 @@ class DoubleCastle < Castle
   end
 
   def topics
-    {
-      **topic_for_at_least_once_5
-    }
+    topic_for_at_least_once_5
   end
 end
 

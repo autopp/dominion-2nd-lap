@@ -32,10 +32,7 @@ class DeathCart < Tactic
     t4 = simulate_turn(hand4)
 
     {
-      **result_of_at_least_once_5(t3, t4),
-      **result_of_at_least_once_6(t3, t4),
-      **result_of_at_least_once_7(t3, t4),
-      **result_of_at_least_once(t3, t4, 8),
+      **result_of_at_least_onces(t3, t4, 5, 6, 7, 8),
       **result_of_both_5(t3, t4),
       **result_of_any(t3, t4, :trashing_ruin),
       **result_of_any(t3, t4, :trashing_death_cart)

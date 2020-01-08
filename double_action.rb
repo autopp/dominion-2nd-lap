@@ -45,8 +45,7 @@ class DoubleCoinAction < DoubleAction
     t4 = simulate_turn(hand4)
 
     {
-      **result_of_at_least_once_5(t3, t4),
-      **result_of_at_least_once_6(t3, t4),
+      **result_of_at_least_onces(t3, t4, 5, 6),
       **result_of_both_5(t3, t4),
       both_action: t3[:played] + t4[:played] == 2,
       doubled: any?(t3, t4, :doubled)
@@ -88,8 +87,7 @@ class CoinAndDrawAction < DoubleAction
     t4 = simulate_turn(hand4, drawn4)
 
     {
-      **result_of_at_least_once_5(t3, t4),
-      **result_of_at_least_once_6(t3, t4),
+      **result_of_at_least_onces(t3, t4, 5, 6),
       **result_of_both_5(t3, t4),
       both_action: t3[:played] + t4[:played] == 2,
       doubled: any?(t3, t4, :doubled)

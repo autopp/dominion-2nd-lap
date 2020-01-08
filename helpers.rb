@@ -60,6 +60,12 @@ module ResultHelper
     { "at_least_once_#{coin}": at_least_once?(t3, t4, coin) }
   end
 
+  def result_of_at_least_onces(t3, t4, *coins)
+    coins.map do |coin|
+      [:"at_least_once_#{coin}", at_least_once?(t3, t4, coin)]
+    end.to_h
+  end
+
   def result_of_at_least_once_5(t3, t4)
     result_of_at_least_once(t3, t4, 5)
   end

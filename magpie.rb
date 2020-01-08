@@ -40,9 +40,7 @@ class Magpie < Tactic
 
     gained = any?(t3, t4, :gained)
     {
-      **result_of_at_least_once_5(t3, t4),
-      **result_of_at_least_once_6(t3, t4),
-      **result_of_at_least_once_7(t3, t4),
+      **result_of_at_least_onces(t3, t4, 5, 6, 7),
       gained: gained,
       gained_and_at_least_once_5: gained && at_least_once_5?(t3, t4)
     }

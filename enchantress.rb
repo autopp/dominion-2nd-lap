@@ -27,9 +27,7 @@ class Enchantress < Tactic
     t4 = simulate_turn(hand4)
 
     {
-      **result_of_at_least_once_5(t3, t4),
-      **result_of_at_least_once_6(t3, t4),
-      **result_of_at_least_once_7(t3, t4),
+      **result_of_at_least_onces(t3, t4, 5, 6, 7),
       duration: duration, skip: skip
     }
   end

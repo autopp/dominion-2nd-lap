@@ -82,10 +82,7 @@ class BorderGuardWithSilver < BorderGuard
     t3 = simulate_turn(hand3)
     t4 = simulate_turn(hand4)
 
-    {
-      **result_of_at_least_once_5(t3, t4),
-      **result_of_at_least_once_6(t3, t4)
-    }
+    result_of_at_least_onces(t3, t4, 5, 6)
   end
 
   def topics
@@ -142,7 +139,7 @@ class BorderGuardWithSalvager < BorderGuard
     t4 = simulate_turn(hand4)
 
     {
-      at_least_once_5: at_least_once_5?(t3, t4),
+      **result_of_at_least_once_5(t3, t4),
       trashing_estate: any?(t3, t4, :trashing_estate),
       trashing_estate_and_at_least_once_5: any?(t3, t4, :trashing_estate) && at_least_once_5?(t3, t4),
       over4_buy2: any?(t3, t4, :over4_buy2)
@@ -204,9 +201,7 @@ class BorderGuardWithBaron < BorderGuard
     t4 = simulate_turn(hand4)
 
     {
-      at_least_once_5: at_least_once_5?(t3, t4),
-      at_least_once_6: at_least_once_6?(t3, t4),
-      at_least_once_7: at_least_once_7?(t3, t4),
+      **result_of_at_least_onces(t3, t4, 5, 6, 7),
       both_5: both_5?(t3, t4),
       both_5_and_at_least_once_6: both_5?(t3, t4) && at_least_once_6?(t3, t4),
       neet: all?(t3, t4, :neet)
