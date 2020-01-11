@@ -4,16 +4,8 @@ class Sacrifice < Tactic
   include GenDecksWithSilverAndAction
 
   def simulate_turn(hand)
-    coin = 0
+    coin = sum_of_coin(hand)
     trashing_estate = false
-    hand.each do |card|
-      case card
-      when COPPER
-        coin += 1
-      when SILVER
-        coin += 2
-      end
-    end
 
     if hand.include?(ACTION)
       if hand.include?(ESTATE) && coin != 4

@@ -1,3 +1,18 @@
+module SimulateHelper
+  def sum_of_coin(hand, **others)
+    hand.reduce(0) do |sum, card|
+      case card
+      when Tactic::COPPER
+        sum + 1
+      when Tactic::SILVER
+        sum + 2
+      else
+        sum + (others[card]&.call || 0)
+      end
+    end
+  end
+end
+
 module ResultHelper
   # predicate
 

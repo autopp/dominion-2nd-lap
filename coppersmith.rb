@@ -3,18 +3,10 @@ require_relative 'tactic'
 class Coppersmith < Tactic
   include GenDecksWithSilverAndAction
 
-  def simulate_turn(hand, **_opts)
-    coin = 0
-    hand.each do |card|
-      case card
-      when COPPER
-        coin += 1
-      when SILVER
-        coin += 2
-      when ACTION
-        coin += hand.count(COPPER)
-      end
-    end
+  def simulate_turn(hand)
+    coin = sum_of_coin(hand)
+    coin += hand.count(COPPER) if hand.include?(ACTION)
+
     { coin: coin }
   end
 

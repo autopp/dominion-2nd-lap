@@ -114,20 +114,12 @@ class BorderGuardWithSalvager < BorderGuard
   end
 
   def simulate_turn(hand)
-    coin = 0
+    coin = sum_of_coin(hand)
     trashing_estate = false
-    hand.each do |card|
-      case card
-      when COPPER
-        coin += 1
-      when SALVAGER
-        if hand.include?(ESTATE)
-          coin += 2
-          trashing_estate = true
-        end
-      end
+    if hand.include?(SALVAGER) && hand.include?(ESTATE)
+      coin += 2
+      trashing_estate = true
     end
-
     over4_buy2 = trashing_estate && coin >= 4
 
     { coin: coin, trashing_estate: trashing_estate, over4_buy2: over4_buy2 }
@@ -178,18 +170,11 @@ class BorderGuardWithBaron < BorderGuard
   end
 
   def simulate_turn(hand)
-    coin = 0
+    coin = sum_of_coin(hand)
     neet = true
-    hand.each do |card|
-      case card
-      when COPPER
-        coin += 1
-      when BARON
-        if hand.include?(ESTATE)
-          coin += 4
-          neet = false
-        end
-      end
+    if hand.include?(BARON) && hand.include?(ESTATE)
+      coin += 4
+      neet = false
     end
 
     { coin: coin, neet: neet }

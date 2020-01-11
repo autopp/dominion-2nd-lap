@@ -4,15 +4,7 @@ class Develop < Tactic
   include GenDecksWithSilverAndAction
 
   def simulate_turn(hand)
-    coin = 0
-    hand.each do |card|
-      case card
-      when COPPER
-        coin += 1
-      when SILVER
-        coin += 2
-      end
-    end
+    coin = sum_of_coin(hand)
     trashing_estate = hand.member?(ACTION) && hand.member?(ESTATE)
 
     { coin: coin, trashing_estate: trashing_estate }

@@ -8,15 +8,7 @@ class Cutpurse < Tactic
   end
 
   def simulate_turn(hand, discarding:)
-    coin_original = 0
-    hand.each do |card|
-      case card
-      when COPPER
-        coin_original += 1
-      when SILVER
-        coin_original += 2
-      end
-    end
+    coin_original = sum_of_coin(hand)
 
     coin = discarding && hand.include?(:c) ? coin_original - 1 : coin_original
     { coin: coin, coin_original: coin_original }

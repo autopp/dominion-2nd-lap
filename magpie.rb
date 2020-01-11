@@ -19,15 +19,7 @@ class Magpie < Tactic
   end
 
   def simulate_turn(hand)
-    coin = 0
-    hand.each do |card|
-      case card
-      when COPPER
-        coin += 1
-      when SILVER, ACTION
-        coin += 2
-      end
-    end
+    coin = sum_of_coin(hand, ACTION => -> { 2 })
 
     { coin: coin, gained: hand.size == 6 }
   end

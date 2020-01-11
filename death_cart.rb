@@ -10,17 +10,8 @@ class DeathCart < Tactic
   end
 
   def simulate_turn(hand)
-    coin = 0
-    hand.each do |card|
-      case card
-      when COPPER
-        coin += 1
-      when SILVER
-        coin += 2
-      when ABANDONED_MINE
-        coin += 1 if !hand.member?(DEATH_CART)
-      end
-    end
+    coin = sum_of_coin(hand)
+    coin += 1 if hand.include?(ABANDONED_MINE) && !hand.include?(DEATH_CART)
 
     additional_coin, trashings = process_death_cart(hand, coin)
     { coin: coin + additional_coin, **trashings }
@@ -129,9 +120,9 @@ class DeathCartAndMine < DeathCart
 end
 
 DeathCartWithSilver.new.report
-# puts
-# DeathCartWithSilverAndMine.new.report
-# puts
-# DeathCartOnly.new.report
-# puts
-# DeathCartAndMine.new.report
+puts
+DeathCartWithSilverAndMine.new.report
+puts
+DeathCartOnly.new.report
+puts
+DeathCartAndMine.new.report

@@ -8,20 +8,7 @@ class Potion < Tactic
   end
 
   def simulate_turn(hand)
-    coin = 0
-    potion = false
-    hand.each do |card|
-      case card
-      when COPPER
-        coin += 1
-      when SILVER
-        coin += 2
-      when POTION
-        potion = true
-      end
-    end
-
-    { coin: coin, potion: potion }
+    { coin: sum_of_coin(hand), potion: hand.include?(POTION) }
   end
 
   def simulate(deck)

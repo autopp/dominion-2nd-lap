@@ -15,20 +15,8 @@ class Lookout < Tactic
   end
 
   def simulate_turn(deck)
-    coin = 0
-    trash = nil
-    discard = nil
-    top = nil
-    deck[0...5].each do |card|
-      case card
-      when COPPER
-        coin += 1
-      when SILVER
-        coin += 2
-      when ACTION
-        trash, discard, top = choose_trashing(deck[5...8])
-      end
-    end
+    coin = sum_of_coin(hand)
+    trash, discard, top = hand.include?(ACTION) ? choose_trashing(deck[5...8]) : [nil, nil, nil]
 
     { coin: coin, trash: trash, discard: discard, top: top }
   end

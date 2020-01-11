@@ -13,18 +13,7 @@ class Mill < Tactic
   end
 
   def simulate_turn(hand)
-    coin = 0
-    hand.each do |card|
-      case card
-      when :c
-        coin += 1
-      when :s
-        coin += 2
-      when :a
-        coin += [hand.count(:e), 2].min
-      end
-    end
-    { coin: coin }
+    { coin: sum_of_coin(hand, ACTION => -> { [hand.count(ESTATE), 2].min }) }
   end
 
   def simulate(deck)

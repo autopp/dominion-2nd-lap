@@ -10,6 +10,7 @@ class Tactic
   # @return [Symbol]
   ACTION = :a
 
+  include SimulateHelper
   include ResultHelper
   include TopicHelper
   include GenDecksHelper
