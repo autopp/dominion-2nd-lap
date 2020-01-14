@@ -15,6 +15,7 @@ class Lookout < Tactic
   end
 
   def simulate_turn(deck)
+    hand = deck[0...5]
     coin = sum_of_coin(hand)
     trash, discard, top = hand.include?(ACTION) ? choose_trashing(deck[5...8]) : [nil, nil, nil]
 
@@ -29,13 +30,14 @@ class Lookout < Tactic
 
     trashing_estate = t3[:trash] == ESTATE || t4[:trash] == ESTATE
     at_least_once_5 = at_least_once_5?(t3, t4) # rubocop:disable Naming/VariableNumber
-    cost5_in_next = at_least_once_5 && !t4[:trash]
+    cost5_in_third_deck = at_least_once_5 && !t4[:trash]
+
     {
       **result_of_at_least_onces(t3, t4, 5, 6),
-      result_of_trashing_estate: trashing_estate,
-      cost5_in_third_deck: at_least_once_5_and_third_deck,
+      trashing_estate: trashing_estate,
+      cost5_in_third_deck: cost5_in_third_deck,
       trashing_estate_and_at_least_once_5: trashing_estate && at_least_once_5,
-      trashing_estate_and_cost5_in_third_deck: trashing_estate && cost5_in_next
+      trashing_estate_and_cost5_in_third_deck: trashing_estate && cost5_in_third_deck
     }
   end
 
@@ -49,4 +51,21 @@ class Lookout < Tactic
       trashing_estate_and_cost5_in_third_deck: '屋敷を廃棄しつつ5金以上のカードが山札3周目に入る確率'
     }
   end
+
+  private
+
+  def choose_trashing(cards)
+    cards.sort_by do |card|
+      case card
+      when ESTATE
+        0
+      when COPPER
+        1
+      else
+        2
+      end
+    end
+  end
 end
+
+Lookout.new.report
