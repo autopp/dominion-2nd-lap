@@ -1,3 +1,16 @@
+module SplitToHandsHelper
+  def split_by_draw_action(deck, draw)
+    case deck.find_index(Tactic::ACTION)
+    when 0...5
+      [deck[0...5 + draw].sort!, deck[5 + draw...10 + draw].sort!]
+    when 5...10
+      [deck[0...5].sort!, deck[5...10 + draw].sort!]
+    else
+      [deck[0...5].sort!, deck[5...10].sort!]
+    end
+  end
+end
+
 module SimulateHelper
   def sum_of_coin(hand, **others)
     hand.reduce(0) do |sum, card|

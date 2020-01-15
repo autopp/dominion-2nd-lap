@@ -61,27 +61,13 @@ end
 
 class DoubleSilversWithTwoDraw < DoubleSilversWithDraw
   def split_to_hands(deck)
-    case deck.find_index(ACTION)
-    when 0...5
-      [deck[0...7].sort!, deck[7...12].sort!]
-    when 5...10
-      [deck[0...5].sort!, deck[5...12].sort!]
-    else
-      [deck[0...5].sort!, deck[5...10].sort!]
-    end
+    split_by_draw_action(deck, 2)
   end
 end
 
 class DoubleSilversWithThreeDraw < DoubleSilversWithDraw
   def split_to_hands(deck)
-    case deck.find_index(ACTION)
-    when 0...5
-      [deck[0...8].sort!, deck[8...13].sort!]
-    when 5...10
-      [deck[0...5].sort!, deck[5...13].sort!]
-    else
-      [deck[0...5].sort!, deck[5...10].sort!]
-    end
+    split_by_draw_action(deck, 3)
   end
 
   def topics

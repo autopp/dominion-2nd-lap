@@ -2,14 +2,7 @@ require_relative 'tactic'
 
 class Mill < Tactic
   def split_to_hands(deck)
-    case deck.find_index(ACTION)
-    when 0...5
-      [deck[0...6].sort!, deck[6...11].sort!]
-    when 5...10
-      [deck[0...5].sort!, deck[5...11].sort!]
-    else
-      [deck[0...5].sort!, deck[5...10].sort!]
-    end
+    split_by_draw_action(deck, 1)
   end
 
   def simulate_turn(hand)
