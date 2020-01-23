@@ -13,6 +13,7 @@ jobs:
       uses: eregon/use-ruby-action@master
       with:
         ruby-version: 2.7
-    - name: Build test
+    - name: run test
       run: |
+        gem install rubocop
         ./ci.sh
