@@ -16,6 +16,14 @@ class Tactic
   include TopicHelper
   include GenDecksHelper
 
+  # title returns title string of this tactic
+  #
+  # @return [String]
+  #
+  def title
+    raise NotImplementedError
+  end
+
   # gen_decks returns deck of 2nd lap
   #
   # @return [Array<Symbol>]
@@ -97,6 +105,7 @@ class Tactic
   def report
     all_patterns = simulate_all
     all = all_patterns.sum { |pattern| pattern[:factor] }
+    puts "#### #{title}\n\n"
     topics.each do |topic, text|
       count = all_patterns.sum { |pattern| pattern[:results][topic] ? pattern[:factor] : 0 }
       puts "- #{text}: #{(count / all.to_f * 100).round(2)}%"
