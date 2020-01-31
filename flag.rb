@@ -1,6 +1,10 @@
 require_relative 'tactic'
 
 class FlagBearerAtFirstTurn < Tactic
+  def title
+    'Flag Bearer を1ターン目に購入し、自分の2ターン目までに Flag を奪われた場合、3ターン目までに……'
+  end
+
   def gen_decks
     with_combination_of_estates(6, num_of_estate: 1) do |factory, other_indices|
       other_indices.map do |flag|
@@ -38,6 +42,10 @@ class FlagBearerAtFirstTurn < Tactic
 end
 
 class FlagBearerAtSecondTurn < Tactic
+  def title
+    ''
+  end
+
   def gen_decks
     with_combination_of_estates(12, num_of_estate: 3) do |factory, other_indices|
       other_indices.permutation(2).map do |(silver, flag)|
@@ -78,20 +86,28 @@ class FlagBearerAtSecondTurn < Tactic
   end
 end
 
-class FlagBearerAtSecondTurnWithFalg < FlagBearerAtSecondTurn
-  def split_to_hands(deck)
-    [deck[0...6].sort!, deck[6...12].sort!]
+class FlagBearerAtSecondTurnWithoutFlag < FlagBearerAtSecondTurn
+  def title
+    '銀・Flag Bearer で自分の3ターン目までに Flag を奪われた場合、4ターン目までに'
   end
-end
 
-class FlagBearerAtSecondTurnWithoutFalg < FlagBearerAtSecondTurn
   def split_to_hands(deck)
     [deck[0...6].sort!, deck[6...11].sort!]
   end
 end
 
+class FlagBearerAtSecondTurnWithFlag < FlagBearerAtSecondTurn
+  def title
+    '銀・Flag Bearer で自分の3ターン目までに Flag を奪われなかった場合、4ターン目までに……'
+  end
+
+  def split_to_hands(deck)
+    [deck[0...6].sort!, deck[6...12].sort!]
+  end
+end
+
 FlagBearerAtFirstTurn.new.report
 puts
-FlagBearerAtSecondTurnWithFalg.new.report
+FlagBearerAtSecondTurnWithFlag.new.report
 puts
-FlagBearerAtSecondTurnWithoutFalg.new.report
+FlagBearerAtSecondTurnWithoutFlag.new.report

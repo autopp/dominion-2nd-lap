@@ -3,6 +3,10 @@ require_relative 'tactic'
 class Sacrifice < Tactic
   include GenDecksWithSilverAndAction
 
+  def title
+    '屋敷場かつ銀貨・生贄で、5金が出る場合は銅貨廃棄を優先する場合、4ターン目までに……'
+  end
+
   def simulate_turn(hand)
     coin = sum_of_coin(hand)
     trashing_estate = false

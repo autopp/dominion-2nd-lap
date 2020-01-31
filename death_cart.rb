@@ -58,6 +58,10 @@ class DeathCart < Tactic
 end
 
 class DeathCartWithSilver < DeathCart
+  def title
+    '屋敷場かつ銀貨・死の荷車で廃墟は2枚とも廃村だった場合、4ターン目までに……'
+  end
+
   def gen_decks
     with_combination_of_estates(14) do |factory, other_indices|
       other_indices.combination(2).flat_map do |ruins|
@@ -75,6 +79,10 @@ class DeathCartWithSilver < DeathCart
 end
 
 class DeathCartWithSilverAndMine < DeathCart
+  def title
+    '屋敷場かつ銀貨・死の荷車で廃墟は廃村と廃坑だった場合、4ターン目までに……'
+  end
+
   def gen_decks
     with_combination_of_estates(14) do |factory, other_indices|
       other_indices.permutation(4).map do |(ruin, mine, silver, death_cart)|
@@ -90,6 +98,10 @@ class DeathCartWithSilverAndMine < DeathCart
 end
 
 class DeathCartOnly < DeathCart
+  def title
+    '屋敷場かつ死の荷車・パスで廃墟は2枚とも廃村だった場合、4ターン目までに……'
+  end
+
   def gen_decks
     with_combination_of_estates(13) do |factory, other_indices|
       other_indices.combination(2).flat_map do |ruins|
@@ -106,6 +118,10 @@ class DeathCartOnly < DeathCart
 end
 
 class DeathCartAndMine < DeathCart
+  def title
+    '屋敷場かつ死の荷車・パスで廃墟は廃村と廃坑だった場合、4ターン目までに……'
+  end
+
   def gen_decks
     with_combination_of_estates(13) do |factory, other_indices|
       other_indices.permutation(3).map do |(ruin, mine, death_cart)|

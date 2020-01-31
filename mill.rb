@@ -32,9 +32,17 @@ end
 
 class MillWithNormalStartHand < Mill
   include GenDecksWithSilverAndAction
+
+  def title
+    '銀貨・Mill で4ターン目までに……'
+  end
 end
 
 class MillWithTrashingHovel < Mill
+  def title
+    '銀貨・Mill 納屋廃棄で4ターン目までに……'
+  end
+
   def gen_decks
     with_combination_of_estates(11, num_of_estate: 2) do |factory, other_indices|
       other_indices.permutation(2).map do |(silver, action)|

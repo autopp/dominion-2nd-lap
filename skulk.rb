@@ -3,6 +3,10 @@ require_relative 'tactic'
 class Skulk < Tactic
   GOLD = :gold
 
+  def title
+    '銀貨・Skulk（+ 金貨）で4ターン目までに……'
+  end
+
   def gen_decks
     with_combination_of_estates(13, num_of_estate: 4) do |factory, other_indices|
       other_indices.permutation(2).map do |(silver, gold)|

@@ -3,6 +3,10 @@ require_relative 'tactic'
 class Develop < Tactic
   include GenDecksWithSilverAndAction
 
+  def title
+    '銀・開発で屋敷は銀貨に変える場合、4ターン目までに……'
+  end
+
   def simulate_turn(hand)
     coin = sum_of_coin(hand)
     trashing_estate = hand.member?(ACTION) && hand.member?(ESTATE)

@@ -44,6 +44,10 @@ class Enchantress < Tactic
 end
 
 class EnchantressOnlyMe < Enchantress
+  def title
+    '自分だけが銀・魔術師で4ターン目までに……'
+  end
+
   def patterns_of_deck
     [
       { factor: 1, opts: { enchantressed_t3: false, enchantressed_t4: false } }
@@ -52,6 +56,10 @@ class EnchantressOnlyMe < Enchantress
 end
 
 class EnchantressFirstPlayer < Enchantress
+  def title
+    '2人戦の先手番で自分も相手も銀・女魔術師の場合、4ターン目までに……'
+  end
+
   def patterns_of_deck
     [
       { factor: 7, opts: { enchantressed_t3: false, enchantressed_t4: false } },
@@ -61,6 +69,10 @@ class EnchantressFirstPlayer < Enchantress
 end
 
 class EnchantressSecondPlayer < Enchantress
+  def title
+    '2人戦の後手番で自分も相手も銀・女魔術師の場合、4ターン目までに……'
+  end
+
   def patterns_of_deck
     [
       { factor: 2, opts: { enchantressed_t3: false, enchantressed_t4: false } },

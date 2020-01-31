@@ -3,6 +3,10 @@ require_relative 'tactic'
 class Coppersmith < Tactic
   include GenDecksWithSilverAndAction
 
+  def title
+    '銀貨・銅細工師で4ターン目までに……'
+  end
+
   def simulate_turn(hand)
     coin = sum_of_coin(hand)
     coin += hand.count(COPPER) if hand.include?(ACTION)

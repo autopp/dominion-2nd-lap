@@ -56,6 +56,10 @@ class Magpie < Tactic
 end
 
 class MagpieWithSilver < Magpie
+  def title
+    '銀貨・カササギで4ターン目までに……'
+  end
+
   def gen_decks
     with_combination_of_estates(12) do |factory, other_indices|
       other_indices.permutation(2).map do |(magpie, silver)|
@@ -69,6 +73,10 @@ class MagpieWithSilver < Magpie
 end
 
 class MagpieWithAction < Magpie
+  def title
+    '木こり・カササギで4ターン目までに……'
+  end
+
   def gen_decks
     with_combination_of_estates(12) do |factory, other_indices|
       other_indices.permutation(2).map do |(magpie, action)|

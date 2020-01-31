@@ -3,6 +3,10 @@ require_relative 'tactic'
 class Transmogrify < Tactic
   include GenDecksWithSilverAndAction
 
+  def title
+    '銀・変容で屋敷は銀貨に変える場合、4ターン目までに……'
+  end
+
   def simulate_turn(hand, reserved)
     coin = sum_of_coin(hand)
     trashing_estate = reserved && hand.include?(ESTATE)

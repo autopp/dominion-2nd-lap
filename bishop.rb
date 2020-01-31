@@ -3,6 +3,10 @@ require_relative 'tactic'
 class BishopTactic < Tactic
   include GenDecksWithSilverAndAction
 
+  def title
+    '屋敷場かつ銀貨・司教で4ターン目までに……'
+  end
+
   def simulate_turn(hand, **_opts)
     coin = sum_of_coin(hand)
     trashing_estate = false

@@ -3,6 +3,10 @@ require_relative 'tactic'
 class Lookout < Tactic
   include GenDecksWithSilverAndAction
 
+  def title
+    '銀・見張りで4ターン目までに……'
+  end
+
   def split_to_hands(deck)
     deck
   end

@@ -17,6 +17,10 @@ class DoubleAction < Tactic
 end
 
 class DoubleCoinAction < DoubleAction
+  def title
+    '屋敷場で2金を出すターミナルアクション2枚を獲得した場合、4ターン目までに……'
+  end
+
   def gen_decks
     with_combination_of_estates(12) do |factory, other_indices|
       other_indices.combination(2).map do |(action1, action2)|
@@ -54,6 +58,10 @@ class DoubleCoinAction < DoubleAction
 end
 
 class CoinAndDrawAction < DoubleAction
+  def title
+    '屋敷場で2金を出すターミナルアクション1枚と2ドローするターミナルアクション1枚を獲得した場合、4ターン目までに……'
+  end
+
   def gen_decks
     with_combination_of_estates(12) do |factory, other_indices|
       other_indices.permutation(2).map do |(coin, draw)|
@@ -106,6 +114,10 @@ class CoinAndDrawAction < DoubleAction
 end
 
 class DoubleCoinActionWithNecropolis < DoubleCoinAction
+  def title
+    '避難所場で2金を出すターミナルアクション2枚を獲得した場合、4ターン目までに……'
+  end
+
   def gen_decks
     with_combination_of_estates(12, num_of_estate: 2) do |factory, other_indices|
       other_indices.permutation(3).map do |(necropolis, action1, action2)|
@@ -120,6 +132,10 @@ class DoubleCoinActionWithNecropolis < DoubleCoinAction
 end
 
 class CoinAndDrawActionWithNecropolis < CoinAndDrawAction
+  def title
+    '避難所場で2金を出すターミナルアクション1枚と2ドローするターミナルアクション1枚を獲得した場合、4ターン目までに……'
+  end
+
   def gen_decks
     with_combination_of_estates(12, num_of_estate: 2) do |factory, other_indices|
       other_indices.permutation(3).map do |(necropolis, coin, draw)|

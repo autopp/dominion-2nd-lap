@@ -30,6 +30,10 @@ class Silvers < Tactic
 end
 
 class TripleSilvers < Silvers
+  def title
+    '銀貨・銀貨・銀貨で4ターン目までに……'
+  end
+
   def gen_decks
     with_combination_of_estates(13) do |factory, other_indices|
       other_indices.combination(3).map do |(s1, s2, s3)|
@@ -60,12 +64,20 @@ class DoubleSilversWithDraw < Silvers
 end
 
 class DoubleSilversWithTwoDraw < DoubleSilversWithDraw
+  def title
+    '銀貨・銀貨・2ドローカード（堀など）で4ターン目までに……'
+  end
+
   def split_to_hands(deck)
     split_by_draw_action(deck, 2)
   end
 end
 
 class DoubleSilversWithThreeDraw < DoubleSilversWithDraw
+  def title
+    '銀貨・銀貨・3ドローカード（鍛冶屋など）で4ターン目までに……'
+  end
+
   def split_to_hands(deck)
     split_by_draw_action(deck, 3)
   end

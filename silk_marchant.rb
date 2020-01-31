@@ -3,6 +3,10 @@ require_relative 'tactic'
 class SilkMarchant < Tactic
   include GenDecksWithSilverAndAction
 
+  def title
+    '銀貨・Silk Merchant で4ターン目までにコイントークン込みで……'
+  end
+
   def split_to_hands(deck)
     split_by_draw_action(deck, 2)
   end

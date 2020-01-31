@@ -64,6 +64,10 @@ class BorderGuard < Tactic
 end
 
 class BorderGuardWithSilver < BorderGuard
+  def title
+    'Border Guard・銀貨で4ターン目までに……'
+  end
+
   def partner
     SILVER
   end
@@ -95,6 +99,10 @@ end
 
 class BorderGuardWithSalvager < BorderGuard
   SALVAGER = :salvager
+
+  def title
+    'Border Guard・引揚水夫で4ターン目までに……'
+  end
 
   def partner
     SALVAGER
@@ -151,6 +159,10 @@ end
 class BorderGuardWithBaron < BorderGuard
   # @return [Symbol]
   BARON = :baron
+
+  def title
+    'Border Guard・男爵で4ターン目までに……'
+  end
 
   def partner
     BARON

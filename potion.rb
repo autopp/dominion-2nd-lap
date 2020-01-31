@@ -46,6 +46,10 @@ class Potion < Tactic
 end
 
 class PotionWithSilver < Potion
+  def title
+    '銀貨・ポーションで4ターン目までに……'
+  end
+
   def gen_decks
     with_combination_of_estates(12) do |factory, other_indices|
       other_indices.permutation(2).map do |(potion, silver)|
@@ -59,6 +63,10 @@ class PotionWithSilver < Potion
 end
 
 class PotionWithDraw < Potion
+  def title
+    'ポーション・2ドローカード（堀など）で4ターン目までに……'
+  end
+
   def gen_decks
     with_combination_of_estates(12) do |factory, other_indices|
       other_indices.permutation(2).map do |(potion, action)|
