@@ -16,4 +16,4 @@ jobs:
     - name: run test
       run: |
         gem install rubocop
-        ./ci.sh
+        ./ci.sh 2>&1
