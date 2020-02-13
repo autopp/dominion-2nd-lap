@@ -16,7 +16,7 @@ class Mill < Tactic
 
     {
       **result_of_at_least_onces(t3, t4, 5, 6, 7),
-      **result_of_both_5(t4, t4)
+      **result_of_both_5(t3, t4)
     }
   end
 

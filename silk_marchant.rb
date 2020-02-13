@@ -22,7 +22,7 @@ class SilkMarchant < Tactic
 
     {
       **result_of_at_least_onces(t3, t4, 5, 6, 7),
-      **result_of_both_5(t3, t4),
+      both_5: [t3[:coin], t4[:coin]].max == 5 && t3[:coin] + t4[:coin] == 9,
       free_choice: t3[:hand] == 7 && t3[:coin] > 4
     }
   end
