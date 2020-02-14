@@ -18,10 +18,10 @@ class Potion < Tactic
 
     {
       **result_of_at_least_onces(t3, t4, 5, 6),
-      potion_2: with_potion?(t3, t4, 2),
-      potion_2_and_at_least_once_5: with_potion?(t3, t4, 2) && at_least_once_5?(t3, t4),
-      potion_3: with_potion?(t3, t4, 3),
-      potion_3_and_at_least_once_5: with_potion?(t3, t4, 3) && at_least_once_5?(t3, t4)
+      potion_2: any_with_potion?(t3, t4, 2),
+      potion_2_and_at_least_once_5: with_potion_and_5?(t3, t4, 2),
+      potion_3: any_with_potion?(t3, t4, 3),
+      potion_3_and_at_least_once_5: with_potion_and_5?(t3, t4, 3)
     }
   end
 
@@ -38,9 +38,19 @@ class Potion < Tactic
 
   private
 
-  def with_potion?(t3, t4, coin)
+  def with_potion?(t, coin)
+    t[:coin] >= coin && t[:potion]
+  end
+
+  def any_with_potion?(t3, t4, coin)
     [t3, t4].any? do |t|
-      t[:coin] >= coin && t[:potion]
+      with_potion?(t, coin)
+    end
+  end
+
+  def with_potion_and_5?(t3, t4, coin)
+    [[t3, t4], [t4, t3]].any? do |(t1, t2)|
+      t1[:coin] >= coin && t1[:potion] && t2[:coin] >= 5
     end
   end
 end
