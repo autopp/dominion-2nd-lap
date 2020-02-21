@@ -6,11 +6,6 @@ class StarChart < Tactic
   end
 
   def gen_decks
-    with_combination_of_estates(10) do |factory, _other_indices|
-      factory.new_deck do |deck|
-        [SILVER, *deck]
-      end
-    end
     (1...11).to_a.combination(3).map do |estates|
       deck = Array.new(11, COPPER)
       deck[0] = SILVER
