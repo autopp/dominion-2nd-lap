@@ -21,7 +21,7 @@ class Tactic
   # @return [String]
   #
   def title
-    raise NotImplementedError
+    ''
   end
 
   # gen_decks returns deck of 2nd lap
