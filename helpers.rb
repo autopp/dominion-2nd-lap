@@ -193,6 +193,13 @@ module GenDecksHelper
     end
   end
 
+  #
+  # @param [Integer] size
+  # @param [Integer] num_of_estate
+  #
+  # @yieldreturn [Array<Symbol>]
+  # @return [Array<Array<Symbol>>]
+  #
   def with_combination_of_estates(size, num_of_estate: 3)
     indices = (0...size).to_a
     indices.combination(num_of_estate).flat_map do |estates|
