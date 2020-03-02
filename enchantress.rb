@@ -45,7 +45,7 @@ end
 
 class EnchantressOnlyMe < Enchantress
   def title
-    '自分だけが銀・魔術師で4ターン目までに……'
+    '自分だけが銀貨・魔術師で4ターン目までに……'
   end
 
   def patterns_of_deck
@@ -57,7 +57,7 @@ end
 
 class EnchantressFirstPlayer < Enchantress
   def title
-    '2人戦の先手番で自分も相手も銀・女魔術師の場合、4ターン目までに……'
+    '2人戦の先手番で自分も相手も銀貨・女魔術師の場合、4ターン目までに……'
   end
 
   def patterns_of_deck
@@ -70,7 +70,7 @@ end
 
 class EnchantressSecondPlayer < Enchantress
   def title
-    '2人戦の後手番で自分も相手も銀・女魔術師の場合、4ターン目までに……'
+    '2人戦の後手番で自分も相手も銀貨・女魔術師の場合、4ターン目までに……'
   end
 
   def patterns_of_deck

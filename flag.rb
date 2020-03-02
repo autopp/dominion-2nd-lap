@@ -88,7 +88,7 @@ end
 
 class FlagBearerAtSecondTurnWithoutFlag < FlagBearerAtSecondTurn
   def title
-    '銀・Flag Bearer で自分の3ターン目までに Flag を奪われた場合、4ターン目までに'
+    '銀貨・Flag Bearer で自分の3ターン目までに Flag を奪われた場合、4ターン目までに'
   end
 
   def split_to_hands(deck)
@@ -98,7 +98,7 @@ end
 
 class FlagBearerAtSecondTurnWithFlag < FlagBearerAtSecondTurn
   def title
-    '銀・Flag Bearer で自分の3ターン目までに Flag を奪われなかった場合、4ターン目までに……'
+    '銀貨・Flag Bearer で自分の3ターン目までに Flag を奪われなかった場合、4ターン目までに……'
   end
 
   def split_to_hands(deck)

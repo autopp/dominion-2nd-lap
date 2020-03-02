@@ -48,7 +48,7 @@ end
 
 class CutpurseFirstPlayer < Cutpurse
   def title
-    '2人戦の先手番で自分も相手も銀・巾着切りの場合、4ターン目までに……'
+    '2人戦の先手番で自分も相手も銀貨・巾着切りの場合、4ターン目までに……'
   end
 
   def patterns_of_deck
@@ -61,7 +61,7 @@ end
 
 class CutpurseSecondPlayer < Cutpurse
   def title
-    '2人戦の後手番で自分も相手も銀・巾着切りの場合、4ターン目までに……'
+    '2人戦の後手番で自分も相手も銀貨・巾着切りの場合、4ターン目までに……'
   end
 
   def patterns_of_deck

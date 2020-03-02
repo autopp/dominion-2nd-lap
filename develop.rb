@@ -4,7 +4,7 @@ class Develop < Tactic
   include GenDecksWithSilverAndAction
 
   def title
-    '銀・開発で屋敷は銀貨に変える場合、4ターン目までに……'
+    '銀貨・開発で屋敷は銀貨に変える場合、4ターン目までに……'
   end
 
   def simulate_turn(hand)

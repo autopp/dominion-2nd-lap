@@ -75,7 +75,7 @@ end
 
 class MilitiaFirstPlayer < Militia
   def title
-    '2人戦の先手番で自分も相手も銀・民兵の場合、4ターン目までに……'
+    '2人戦の先手番で自分も相手も銀貨・民兵の場合、4ターン目までに……'
   end
 
   def patterns_of_deck
@@ -88,7 +88,7 @@ end
 
 class MilitiaSecondPlayer < Militia
   def title
-    '2人戦の後手番で自分も相手も銀・民兵の場合、4ターン目までに……'
+    '2人戦の後手番で自分も相手も銀貨・民兵の場合、4ターン目までに……'
   end
 
   def patterns_of_deck

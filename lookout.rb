@@ -4,7 +4,7 @@ class Lookout < Tactic
   include GenDecksWithSilverAndAction
 
   def title
-    '銀・見張りで4ターン目までに……'
+    '銀貨・見張りで4ターン目までに……'
   end
 
   def split_to_hands(deck)
