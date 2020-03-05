@@ -40,7 +40,7 @@ class Stockpile < Tactic
       **topic_for_at_least_once_6,
       **topic_for_at_least_once_7,
       **topic_for_at_least_once(8),
-      **topic_for_at_least_once(9),
+      **topic_for_at_least_once(9, geq: false),
       **topic_for_both_5,
       **topic_for_both_and_at_least_once(5, 6)
     }
