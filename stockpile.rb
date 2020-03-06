@@ -4,7 +4,7 @@ class Stockpile < Tactic
   STOCKPILE = :stockpile
 
   def title
-    '銀貨・Stockpile で4ターン目までに……'
+    'Stockpile・Stockpile で4ターン目までに……'
   end
 
   def gen_decks
