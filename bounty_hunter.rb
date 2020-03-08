@@ -30,9 +30,8 @@ class BountyHunter < Tactic
       **result_of_at_least_onces(t3, t4, 5, 6, 7),
       **result_of_both_5(t3, t4),
       **result_of_both_and_at_least_once(t3, t4, 5, 6),
+      **result_of_both(t3, t4, 6),
       **result_of_trashing_estate(t3, t4),
-      **result_of_trashing_estate_and_at_least_once_5(t3, t4),
-      **result_of_trashing_estate_and_at_least_once(t3, t4, 6),
       **result_of_trashing_estate_and_at_least_once(t3, t4, 6)
     }
   end
@@ -44,10 +43,12 @@ class BountyHunter < Tactic
       **topic_for_at_least_once_7(geq: false),
       **topic_for_both_5,
       **topic_for_both_and_at_least_once(5, 6),
+      **topic_for_both(6, geq: false),
       **topic_for_trashing_estate,
-      **topic_for_trashing_estate_and_at_least_once_5,
       **topic_for_trashing_estate_and_at_least_once(6)
-    }
+    }.transform_values do |v|
+      v.sub('廃棄', ' Exile ')
+    end
   end
 end
 
