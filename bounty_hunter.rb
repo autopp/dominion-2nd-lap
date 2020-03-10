@@ -1,12 +1,6 @@
 require_relative 'tactic'
 
 class BountyHunter < Tactic
-  def title
-    '銀貨・Bounty Hunter で4ターン目までに……'
-  end
-
-  include GenDecksWithSilverAndAction
-
   def simulate_turn(hand)
     coin = sum_of_coin(hand)
 
@@ -52,4 +46,30 @@ class BountyHunter < Tactic
   end
 end
 
-BountyHunter.new.report
+class BountyHunterWithSilver < BountyHunter
+  def title
+    '銀貨・Bounty Hunter で4ターン目までに……'
+  end
+
+  include GenDecksWithSilverAndAction
+end
+
+class BountyHunterOnly < BountyHunter
+  def title
+    'Bounty Hunter・パス（あるいは前駆者など）で4ターン目までに……'
+  end
+
+  def gen_decks
+    with_combination_of_estates(11) do |factory, other_indices|
+      other_indices.map do |action|
+        factory.new_deck do |deck|
+          deck[action] = ACTION
+        end
+      end
+    end
+  end
+end
+
+BountyHunterWithSilver.new.report
+puts
+BountyHunterOnly.new.report
