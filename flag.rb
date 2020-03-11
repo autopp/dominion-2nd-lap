@@ -2,7 +2,7 @@ require_relative 'tactic'
 
 class FlagBearerAtFirstTurn < Tactic
   def title
-    'Flag Bearer を1ターン目に購入し、自分の2ターン目までに Flag を奪われた場合、3ターン目までに……'
+    '旗手を1ターン目に購入し、自分の2ターン目までに旗を奪われた場合、3ターン目までに……'
   end
 
   def gen_decks
@@ -88,7 +88,7 @@ end
 
 class FlagBearerAtSecondTurnWithoutFlag < FlagBearerAtSecondTurn
   def title
-    '銀貨・Flag Bearer で自分の3ターン目までに Flag を奪われた場合、4ターン目までに'
+    '銀貨・旗手で自分の3ターン目までに旗を奪われた場合、4ターン目までに'
   end
 
   def split_to_hands(deck)
@@ -98,7 +98,7 @@ end
 
 class FlagBearerAtSecondTurnWithFlag < FlagBearerAtSecondTurn
   def title
-    '銀貨・Flag Bearer で自分の3ターン目までに Flag を奪われなかった場合、4ターン目までに……'
+    '銀貨・旗手で自分の3ターン目までに旗を奪われなかった場合、4ターン目までに……'
   end
 
   def split_to_hands(deck)

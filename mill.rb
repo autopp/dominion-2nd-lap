@@ -34,13 +34,13 @@ class MillWithNormalStartHand < Mill
   include GenDecksWithSilverAndAction
 
   def title
-    '銀貨・Mill で4ターン目までに……'
+    '銀貨・風車で4ターン目までに……'
   end
 end
 
 class MillWithTrashingHovel < Mill
   def title
-    '銀貨・Mill 納屋廃棄で4ターン目までに……'
+    '銀貨・風車（納屋廃棄）で4ターン目までに……'
   end
 
   def gen_decks

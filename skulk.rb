@@ -4,7 +4,7 @@ class Skulk < Tactic
   GOLD = :gold
 
   def title
-    '銀貨・Skulk（+ 金貨）で4ターン目までに……'
+    '銀貨・暗躍者（+ 金貨）で4ターン目までに……'
   end
 
   def gen_decks

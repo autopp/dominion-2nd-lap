@@ -4,7 +4,7 @@ class SilkMarchant < Tactic
   include GenDecksWithSilverAndAction
 
   def title
-    '銀貨・Silk Merchant で4ターン目までにコイントークン込みで……'
+    '銀貨・絹商人で4ターン目までにコイントークン込みで……'
   end
 
   def split_to_hands(deck)

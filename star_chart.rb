@@ -2,7 +2,7 @@ require_relative 'tactic'
 
 class StarChart < Tactic
   def title
-    '銀貨・Star Chart で銀貨をトップに乗せた場合、4ターン目までに……'
+    '銀貨・星図で銀貨をトップに乗せた場合、4ターン目までに……'
   end
 
   def gen_decks

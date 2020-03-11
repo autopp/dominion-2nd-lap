@@ -65,7 +65,7 @@ end
 
 class BorderGuardWithSilver < BorderGuard
   def title
-    'Border Guard・銀貨で4ターン目までに……'
+    '国境警備隊・銀貨で4ターン目までに……'
   end
 
   def partner
@@ -101,7 +101,7 @@ class BorderGuardWithSalvager < BorderGuard
   SALVAGER = :salvager
 
   def title
-    'Border Guard・引揚水夫で4ターン目までに……'
+    '国境警備隊・引揚水夫で4ターン目までに……'
   end
 
   def partner
@@ -161,7 +161,7 @@ class BorderGuardWithBaron < BorderGuard
   BARON = :baron
 
   def title
-    'Border Guard・男爵で4ターン目までに……'
+    '国境警備隊・男爵で4ターン目までに……'
   end
 
   def partner
