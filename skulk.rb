@@ -3,21 +3,6 @@ require_relative 'tactic'
 class Skulk < Tactic
   GOLD = :gold
 
-  def title
-    '銀貨・暗躍者（+ 金貨）で4ターン目までに……'
-  end
-
-  def gen_decks
-    with_combination_of_estates(13, num_of_estate: 4) do |factory, other_indices|
-      other_indices.permutation(2).map do |(silver, gold)|
-        factory.new_deck do |deck|
-          deck[silver] = SILVER
-          deck[gold] = GOLD
-        end
-      end
-    end
-  end
-
   def simulate_turn(hand, **_opts)
     { coin: sum_of_coin(hand, GOLD => -> { 3 }) }
   end
@@ -42,4 +27,39 @@ class Skulk < Tactic
   end
 end
 
-Skulk.new.report
+class SkulkWithSilver < Skulk
+  def title
+    '銀貨・暗躍者（+ 金貨）で4ターン目までに……'
+  end
+
+  def gen_decks
+    with_combination_of_estates(13, num_of_estate: 4) do |factory, other_indices|
+      other_indices.permutation(2).map do |(silver, gold)|
+        factory.new_deck do |deck|
+          deck[silver] = SILVER
+          deck[gold] = GOLD
+        end
+      end
+    end
+  end
+end
+
+class SkulkOnly < Skulk
+  def title
+    '暗躍者（+ 金貨）・パスで4ターン目までに……'
+  end
+
+  def gen_decks
+    with_combination_of_estates(12, num_of_estate: 4) do |factory, other_indices|
+      other_indices.map do |gold|
+        factory.new_deck do |deck|
+          deck[gold] = GOLD
+        end
+      end
+    end
+  end
+end
+
+SkulkWithSilver.new.report
+puts
+SkulkOnly.new.report
