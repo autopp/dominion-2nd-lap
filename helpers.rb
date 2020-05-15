@@ -19,6 +19,8 @@ module SimulateHelper
         sum + 1
       when Tactic::SILVER
         sum + 2
+      when Tactic::GOLD
+        sum + 3
       else
         sum + (others[card]&.call || 0)
       end

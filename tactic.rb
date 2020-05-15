@@ -6,6 +6,8 @@ class Tactic
   # @return [Symbol]
   SILVER = :s
   # @return [Symbol]
+  GOLD = :g
+  # @return [Symbol]
   ESTATE = :e
   # @return [Symbol]
   ACTION = :a

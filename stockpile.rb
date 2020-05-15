@@ -1,8 +1,6 @@
 require_relative 'tactic'
 
 class Stockpile < Tactic
-  STOCKPILE = :stockpile
-
   def title
     'Stockpile・Stockpile で4ターン目までに……'
   end
@@ -11,15 +9,15 @@ class Stockpile < Tactic
     with_combination_of_estates(12) do |factory, other_indices|
       other_indices.combination(2).map do |others|
         factory.new_deck do |deck|
-          deck[others[0]] = STOCKPILE
-          deck[others[1]] = STOCKPILE
+          deck[others[0]] = GOLD
+          deck[others[1]] = GOLD
         end
       end
     end
   end
 
   def simulate_turn(hand)
-    { coin: sum_of_coin(hand, STOCKPILE => -> { 3 }) }
+    { coin: sum_of_coin(hand) }
   end
 
   def simulate(deck)

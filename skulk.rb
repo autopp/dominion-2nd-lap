@@ -1,10 +1,8 @@
 require_relative 'tactic'
 
 class Skulk < Tactic
-  GOLD = :gold
-
   def simulate_turn(hand, **_opts)
-    { coin: sum_of_coin(hand, GOLD => -> { 3 }) }
+    { coin: sum_of_coin(hand) }
   end
 
   def simulate(deck)
