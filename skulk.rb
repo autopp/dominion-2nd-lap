@@ -44,7 +44,7 @@ end
 
 class SkulkOnly < Skulk
   def title
-    '暗躍者（+ 金貨）・パスで4ターン目までに……'
+    '暗躍者（+ 金貨）・パス（あるいは騎士見習いなど）で4ターン目までに……'
   end
 
   def gen_decks

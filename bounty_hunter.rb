@@ -56,7 +56,7 @@ end
 
 class BountyHunterOnly < BountyHunter
   def title
-    'Bounty Hunter・パス（あるいは前駆者など）で4ターン目までに……'
+    'Bounty Hunter・パス（あるいは騎士見習いなど）で4ターン目までに……'
   end
 
   def gen_decks
