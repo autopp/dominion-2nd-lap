@@ -19,7 +19,7 @@ class FlagBearerAtFirstTurn < Tactic
     [deck[0...6].sort!, deck[6...11].sort!]
   end
 
-  include SimulateTurnWithSilverOnly
+  include SimulateTurnWithBaseCoinOnly
 
   def simulate(deck)
     hand2, hand3 = deck
@@ -61,7 +61,7 @@ class FlagBearerAtSecondTurn < Tactic
     raise NotImplementedError
   end
 
-  include SimulateTurnWithSilverOnly
+  include SimulateTurnWithBaseCoinOnly
 
   def simulate(deck)
     hand3, hand4 = deck

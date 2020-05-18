@@ -5,7 +5,7 @@ class Silvers < Tactic
     NotImplementedError
   end
 
-  include SimulateTurnWithSilverOnly
+  include SimulateTurnWithBaseCoinOnly
 
   def simulate(deck)
     t3, t4 = deck.map(&method(:simulate_turn))

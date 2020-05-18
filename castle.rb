@@ -1,7 +1,7 @@
 require_relative 'tactic'
 
 class Castle < Tactic
-  include SimulateTurnWithSilverOnly
+  include SimulateTurnWithBaseCoinOnly
 
   def simulate(deck)
     hand3, hand4 = deck

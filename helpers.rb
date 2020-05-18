@@ -237,17 +237,8 @@ module GenDecksWithDoubleSilver
   end
 end
 
-module SimulateTurnWithSilverOnly
+module SimulateTurnWithBaseCoinOnly
   def simulate_turn(hand)
-    coin = 0
-    hand.each do |card|
-      case card
-      when Tactic::COPPER
-        coin += 1
-      when Tactic::SILVER
-        coin += 2
-      end
-    end
-    { coin: coin }
+    { coin: sum_of_coin(hand) }
   end
 end

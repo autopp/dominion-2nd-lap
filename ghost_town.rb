@@ -19,7 +19,7 @@ class GhostTown < Tactic
     [deck[0...6], deck[6...11]]
   end
 
-  include SimulateTurnWithSilverOnly
+  include SimulateTurnWithBaseCoinOnly
 
   def simulate(deck)
     hand3, hand4 = deck

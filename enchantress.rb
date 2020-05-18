@@ -11,7 +11,7 @@ class Enchantress < Tactic
     raise NotImplementedError
   end
 
-  include SimulateTurnWithSilverOnly
+  include SimulateTurnWithBaseCoinOnly
 
   def simulate(deck, enchantressed_t3:, enchantressed_t4:)
     hand3, hand4, duration, skip = case deck.find_index(ACTION)
