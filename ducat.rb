@@ -3,21 +3,6 @@ require_relative 'tactic'
 class Ducat < Tactic
   DUCAT = :ducat
 
-  def title
-    '銀貨・ドゥカート金貨（銅貨廃棄）で4ターン目までに……'
-  end
-
-  def gen_decks
-    with_combination_of_estates(11) do |factory, other_indices|
-      other_indices.permutation(2).map do |others|
-        factory.new_deck do |deck|
-          deck[others[0]] = SILVER
-          deck[others[1]] = DUCAT
-        end
-      end
-    end
-  end
-
   def simulate_turn(hand, coffer:, use_all_coffers:)
     coin = sum_of_coin(hand)
     coffer += hand.count(DUCAT)
@@ -50,4 +35,40 @@ class Ducat < Tactic
   end
 end
 
-Ducat.new.report
+class DucatWithSilver < Ducat
+  def title
+    '銀貨・ドゥカート金貨（銅貨廃棄）で4ターン目までに……'
+  end
+
+  def gen_decks
+    with_combination_of_estates(11) do |factory, other_indices|
+      other_indices.permutation(2).map do |others|
+        factory.new_deck do |deck|
+          deck[others[0]] = SILVER
+          deck[others[1]] = DUCAT
+        end
+      end
+    end
+  end
+end
+
+class DoubleDucat < Ducat
+  def title
+    'ドゥカート金貨・ドゥカート金貨（銅貨2枚廃棄）で4ターン目までに……'
+  end
+
+  def gen_decks
+    with_combination_of_estates(10) do |factory, other_indices|
+      other_indices.combination(2).map do |others|
+        factory.new_deck do |deck|
+          deck[others[0]] = DUCAT
+          deck[others[1]] = DUCAT
+        end
+      end
+    end
+  end
+end
+
+DucatWithSilver.new.report
+puts
+DoubleDucat.new.report
