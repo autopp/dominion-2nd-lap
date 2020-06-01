@@ -19,7 +19,7 @@ class Skulk < Tactic
       **topic_for_at_least_once_5,
       **topic_for_at_least_once_6,
       **topic_for_at_least_once_7,
-      **topic_for_at_least_once(8, geq: false),
+      **topic_for_at_least_once_8,
       **topic_for_both_5
     }
   end

@@ -151,6 +151,10 @@ module TopicHelper
     topic_for_at_least_once(7, geq: geq)
   end
 
+  def topic_for_at_least_once_8(geq: true)
+    topic_for_at_least_once(8, geq: geq)
+  end
+
   def topic_for_both(coin, geq: true)
     { "both_#{coin}": "両ターン共に#{coin}金#{geq ? '以上' : ''}が出る確率" }
   end

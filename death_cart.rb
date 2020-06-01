@@ -35,7 +35,7 @@ class DeathCart < Tactic
       **topic_for_at_least_once_5,
       **topic_for_at_least_once_6,
       **topic_for_at_least_once_7,
-      **topic_for_at_least_once(8),
+      **topic_for_at_least_once_8,
       **topic_for_both_5,
       trashing_ruin: '廃墟を廃棄できる確率',
       trashing_death_cart: '死の荷車を廃棄することになる確率'
