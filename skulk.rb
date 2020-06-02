@@ -42,6 +42,27 @@ class SkulkWithSilver < Skulk
   end
 end
 
+class SkulkWithDraw < Skulk
+  def title
+    '暗躍者（+ 金貨）・2ドローカード（堀など）で4ターン目までに……'
+  end
+
+  def gen_decks
+    with_combination_of_estates(13, num_of_estate: 4) do |factory, other_indices|
+      other_indices.permutation(2).map do |(action, gold)|
+        factory.new_deck do |deck|
+          deck[action] = ACTION
+          deck[gold] = GOLD
+        end
+      end
+    end
+  end
+
+  def split_to_hands(deck)
+    split_by_draw_action(deck, 2)
+  end
+end
+
 class SkulkOnly < Skulk
   def title
     '暗躍者（+ 金貨）・パス（あるいは騎士見習いなど）で4ターン目までに……'
@@ -59,5 +80,7 @@ class SkulkOnly < Skulk
 end
 
 SkulkWithSilver.new.report
+puts
+SkulkWithDraw.new.report
 puts
 SkulkOnly.new.report
