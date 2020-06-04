@@ -44,4 +44,23 @@ class CargoShipWithSilver < CargoShip
   include GenDecksWithSilverAndAction
 end
 
+class DoubleCargoShip < CargoShip
+  def title
+    '貨物船・貨物船で4ターン目までに……'
+  end
+
+  def gen_decks
+    with_combination_of_estates(12) do |factory, other_indices|
+      other_indices.combination(2).map do |(action1, action2)|
+        factory.new_deck do |deck|
+          deck[action1] = ACTION
+          deck[action2] = ACTION
+        end
+      end
+    end
+  end
+end
+
 CargoShipWithSilver.new.report
+puts
+DoubleCargoShip.new.report
