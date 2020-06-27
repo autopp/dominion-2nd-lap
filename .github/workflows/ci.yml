@@ -1,19 +1,17 @@
-name: Ruby
+name: Check
 
 on: [push]
 
 jobs:
-  build:
-
+  check:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v1
     - name: Set up Ruby 2.7
       uses: eregon/use-ruby-action@master
       with:
         ruby-version: 2.7
-    - name: run test
+    - name: check
       run: |
         gem install rubocop
         ./ci.sh 2>&1
