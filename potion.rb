@@ -72,6 +72,22 @@ class PotionWithSilver < Potion
   end
 end
 
+class PotionWithCopper < Potion
+  def title
+    '銅貨・ポーションで4ターン目までに……'
+  end
+
+  def gen_decks
+    with_combination_of_estates(12) do |factory, other_indices|
+      other_indices.map do |potion|
+        factory.new_deck do |deck|
+          deck[potion] = POTION
+        end
+      end
+    end
+  end
+end
+
 class PotionWithDraw < Potion
   def title
     'ポーション・2ドローカード（堀など）で4ターン目までに……'
@@ -183,6 +199,8 @@ class PotionWithStoreroom4 < PotionWithStoreroom
 end
 
 PotionWithSilver.new.report
+puts
+PotionWithCopper.new.report
 puts
 PotionWithDraw.new.report
 puts
