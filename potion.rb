@@ -125,6 +125,22 @@ class PotionOnly < Potion
   end
 end
 
+class PotionWithCurse < Potion
+  def title
+    'ポーション・呪いで4ターン目までに……'
+  end
+
+  def gen_decks
+    with_combination_of_estates(12, num_of_estate: 4) do |factory, other_indices|
+      other_indices.map do |potion|
+        factory.new_deck do |deck|
+          deck[potion] = POTION
+        end
+      end
+    end
+  end
+end
+
 class PotionWithStoreroom < Potion
   def title
     "ポーション・物置で3T目の物置は#{num_of_discard}枚捨てる場合、デッキ3周目までに……"
@@ -205,6 +221,8 @@ puts
 PotionWithDraw.new.report
 puts
 PotionOnly.new.report
+puts
+PotionWithCurse.new.report
 puts
 PotionWithStoreroom2.new.report
 puts
