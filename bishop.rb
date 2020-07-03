@@ -1,6 +1,6 @@
 require_relative 'tactic'
 
-class BishopTactic < Tactic
+class Bishop < Tactic
   include GenDecksWithSilverAndAction
 
   def title
@@ -41,4 +41,4 @@ class BishopTactic < Tactic
   end
 end
 
-BishopTactic.new.report
+Bishop.new.report
