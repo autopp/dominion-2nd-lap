@@ -41,8 +41,12 @@ class Salvager < Tactic
   end
 end
 
-class SalvagerWithShelter < Tactic
+class SalvagerWithShelter < Salvager
   OVERGROWN_ESTATE = :overgrown_estate
+
+  def title
+    '避難所場かつ銀貨・引揚水夫で4ターン目までに……'
+  end
 
   def gen_decks
     with_combination_of_estates(12, num_of_estate: 2) do |factory, other_indices|
@@ -66,10 +70,6 @@ class SalvagerWithShelter < Tactic
     [top5, next5]
   end
 
-  def title
-    '避難所場かつ銀貨・引揚水夫で4ターン目までに……'
-  end
-
   def simulate_turn(hand, **_opts)
     coin = sum_of_coin(hand)
     trashing_estate = false
@@ -79,28 +79,6 @@ class SalvagerWithShelter < Tactic
       coin += 1
     end
     { coin: coin, trashing_estate: trashing_estate }
-  end
-
-  def simulate(deck)
-    hand3, hand4, = deck
-    t3 = simulate_turn(hand3)
-    t4 = simulate_turn(hand4)
-    {
-      **result_of_at_least_onces(t3, t4, 5, 6),
-      **result_of_both_5(t3, t4),
-      **result_of_trashing_estate(t3, t4),
-      **result_of_trashing_estate_and_at_least_once_5(t3, t4)
-    }
-  end
-
-  def topics
-    {
-      **topic_for_at_least_once_5,
-      **topic_for_at_least_once_6(geq: false),
-      **topic_for_both_5,
-      **topic_for_trashing_estate,
-      **topic_for_trashing_estate_and_at_least_once_5
-    }
   end
 end
 
