@@ -80,6 +80,10 @@ class SalvagerWithShelter < Salvager
     end
     { coin: coin, trashing_estate: trashing_estate }
   end
+
+  def topics
+    super.transform_values! { _1.sub('屋敷', '避難所') }
+  end
 end
 
 Salvager.new.report
