@@ -29,7 +29,7 @@ class Remodel < Tactic
   end
 end
 
-class RemodelWithSilver< Remodel
+class RemodelWithSilver < Remodel
   def title
     '銀貨・改築で4ターン目までに……'
   end
@@ -46,4 +46,28 @@ class RemodelWithSilver< Remodel
   end
 end
 
+class RemodelWithDraw < Remodel
+  def title
+    '改築・アクション付き2ドロー（追従者など）で4ターン目までに……'
+  end
+
+
+  def gen_decks
+    with_combination_of_estates(12) do |factory, other_indices|
+      other_indices.permutation(2).map do |(action, remodel)|
+        factory.new_deck do |deck|
+          deck[action] = ACTION
+          deck[remodel] = REMODEL
+        end
+      end
+    end
+  end
+
+  def split_to_hands(deck)
+    split_by_draw_action(deck, 2)
+  end
+end
+
 RemodelWithSilver.new.report
+puts
+RemodelWithDraw.new.report
