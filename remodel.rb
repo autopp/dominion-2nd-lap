@@ -51,7 +51,6 @@ class RemodelWithDraw < Remodel
     '改築・アクション付き2ドロー（追従者など）で4ターン目までに……'
   end
 
-
   def gen_decks
     with_combination_of_estates(12) do |factory, other_indices|
       other_indices.permutation(2).map do |(action, remodel)|
