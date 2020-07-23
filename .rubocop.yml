@@ -4,31 +4,28 @@ AllCops:
 Layout/CaseIndentation:
   EnforcedStyle: end
 
-Layout/EmptyLinesAroundAttributeAccessor:
-  Enabled: true
-
 Layout/EndAlignment:
   EnforcedStyleAlignWith: start_of_line
 
 Layout/LineLength:
   Max: 120
 
-Layout/SpaceAroundMethodCallOperator:
+Layout/EmptyLinesAroundAttributeAccessor:
   Enabled: true
 
-Lint/DeprecatedOpenSSLConstant:
-  Enabled: true
+Style/AccessorGrouping:
+  Enabled: false
 
-Lint/MixedRegexpCaptureTypes:
-  Enabled: true
-
-Lint/RaiseException:
-  Enabled: true
-
-Lint/StructNewOverride:
+Style/ArrayCoercion:
   Enabled: true
 
 Style/AsciiComments:
+  Enabled: false
+
+Style/BisectedAttrAccessor:
+  Enabled: true
+
+Style/CaseLikeIf:
   Enabled: false
 
 Style/Documentation:
@@ -37,11 +34,14 @@ Style/Documentation:
 Style/EmptyMethod:
   Enabled: false
 
-Style/ExponentialNotation:
+Style/HashAsLastArrayItem:
   Enabled: true
 
 Style/HashEachMethods:
   Enabled: true
+
+Style/HashLikeCase:
+  Enabled: false
 
 Style/HashTransformKeys:
   Enabled: true
@@ -61,7 +61,13 @@ Style/NegatedWhile:
 Style/NumericPredicate:
   Enabled: false
 
+Style/RedundantAssignment:
+  Enabled: true
+
 Style/RedundantFetchBlock:
+  Enabled: true
+
+Style/RedundantFileExtensionInRequire:
   Enabled: true
 
 Style/RedundantRegexpCharacterClass:
@@ -96,3 +102,24 @@ Naming/MethodParameterName:
 
 Bundler/OrderedGems:
   Enabled: false
+
+Layout/SpaceAroundMethodCallOperator:
+  Enabled: true
+
+Lint/RaiseException:
+  Enabled: true
+
+Lint/StructNewOverride:
+  Enabled: true
+
+Lint/DeprecatedOpenSSLConstant:
+  Enabled: true
+
+Lint/DuplicateElsifCondition:
+  Enabled: true
+
+Lint/MixedRegexpCaptureTypes:
+  Enabled: true
+
+Style/ExponentialNotation:
+  Enabled: true
