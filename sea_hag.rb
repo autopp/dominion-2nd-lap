@@ -68,7 +68,7 @@ class SeaHagWithSilverFirstPlayer < SeaHagWithSilver
   include FirstPlayer
 
   def title
-    '2人戦の先手番で自分も相手も相手も銀貨・海の妖婆の場合、4ターン目までに……'
+    '2人戦の先手番で自分も相手も銀貨・海の妖婆の場合、4ターン目までに……'
   end
 end
 
@@ -76,7 +76,7 @@ class SeaHagWithSilverSecondPlayer < SeaHagWithSilver
   include SecondPlayer
 
   def title
-    '2人戦の後手番で自分も相手も相手も銀貨・海の妖婆の場合、4ターン目までに……'
+    '2人戦の後手番で自分も相手も銀貨・海の妖婆の場合、4ターン目までに……'
   end
 end
 
