@@ -80,6 +80,30 @@ class SeaHagWithSeaHagSecondPlayer < SeaHagWithSeaHag
   end
 end
 
+class SeaHagWithSilver < SeaHag
+  include GenDecksWithDoubleSilver
+end
+
+class SeaHagWithSilverFirstPlayer < SeaHagWithSilver
+  include FirstPlayer
+
+  def title
+    '2人戦の先手番で自分が銀貨・銀貨、相手が銀貨・海の妖婆の場合、4ターン目までに……'
+  end
+end
+
+class SeaHagWithSilverSecondPlayer < SeaHagWithSilver
+  include SecondPlayer
+
+  def title
+    '2人戦の後手番で自分が銀貨・銀貨、相手が銀貨・海の妖婆の場合、4ターン目までに……'
+  end
+end
+
 SeaHagWithSeaHagFirstPlayer.new.report
 puts
 SeaHagWithSeaHagSecondPlayer.new.report
+puts
+SeaHagWithSilverFirstPlayer.new.report
+puts
+SeaHagWithSilverSecondPlayer.new.report
