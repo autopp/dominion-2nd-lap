@@ -60,11 +60,11 @@ class SeaHag < Tactic
   end
 end
 
-class SeaHagWithSilver < SeaHag
+class SeaHagWithSeaHag < SeaHag
   include GenDecksWithSilverAndAction
 end
 
-class SeaHagWithSilverFirstPlayer < SeaHagWithSilver
+class SeaHagWithSeaHagFirstPlayer < SeaHagWithSeaHag
   include FirstPlayer
 
   def title
@@ -72,7 +72,7 @@ class SeaHagWithSilverFirstPlayer < SeaHagWithSilver
   end
 end
 
-class SeaHagWithSilverSecondPlayer < SeaHagWithSilver
+class SeaHagWithSeaHagSecondPlayer < SeaHagWithSeaHag
   include SecondPlayer
 
   def title
@@ -80,6 +80,6 @@ class SeaHagWithSilverSecondPlayer < SeaHagWithSilver
   end
 end
 
-SeaHagWithSilverFirstPlayer.new.report
+SeaHagWithSeaHagFirstPlayer.new.report
 puts
-SeaHagWithSilverSecondPlayer.new.report
+SeaHagWithSeaHagSecondPlayer.new.report
