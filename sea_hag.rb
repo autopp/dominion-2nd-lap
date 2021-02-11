@@ -67,52 +67,24 @@ end
 class SeaHagWithTwoDraw < SeaHag
   include GenDecksWithSilverAndAction
 
-  def simulate_turn(hand, attacked:)
-    coin_original = sum_of_coin(hand)
-    coin = attacked ? sum_of_coin(hand.drop(1)) : coin_original
-
-    { coin: coin, coin_original: coin_original }
+  def simulate_turn(deck, attacked)
+    deck[5] = ESTATE if attacked
+    hand_size = deck.find_index(ACTION)&.between?(0, 4) ? 7 : 5
+    [sum_of_coin(deck.take(hand_size)), deck.drop(hand_size)]
   end
 
   def simulate(deck, attacked_t3:, attacked_t4:)
-    action_pos = deck.find_index(ACTION)
+    deck_orig = deck.clone
 
-    h3_original, h4_original = case action_pos
-    when 0...5
-      [deck[0...7], deck[7...12]]
-    when 5...10
-      [deck[0...5], deck[5...12]]
-    else
-      [deck[0...5], deck[5...10]]
-    end
+    t3_coin_orig, rest = simulate_turn(deck_orig, false)
+    t4_coin_orig, = simulate_turn(rest, false)
 
-    attacked_deck = deck.dup
-    h3, h4 = if attacked_t3
-      attacked_deck[5] = ESTATE
-      case action_pos
-      when 0...5
-        [attacked_deck[0...7], attacked_deck[7...12]]
-      when 6...10
-        [attacked_deck[0...5], attacked_deck[5...12]]
-      else
-        [attacked_deck[0...5], attacked_deck[5...10]]
-      end
-    elsif attacked_t4
-      case action_pos
-      when 0...5
-        [attacked_deck[0...7], attacked_deck[7...12]]
-      when 5...10
-        attacked_deck[10] = ESTATE
-        [attacked_deck[0...5], attacked_deck[5...12]]
-      else
-        [h3_original, h4_original]
-      end
-    else
-      [h3_original, h4_original]
-    end
+    deck_attacked = [*deck, ESTATE]
+    t3_coin, rest = simulate_turn(deck_attacked, attacked_t3)
+    t4_coin, = simulate_turn(rest, attacked_t4)
 
-    t3 = { coin: sum_of_coin(h3), coin_original: sum_of_coin(h3_original) }
-    t4 = { coin: sum_of_coin(h4), coin_original: sum_of_coin(h4_original) }
+    t3 = { coin: t3_coin, coin_original: t3_coin_orig }
+    t4 = { coin: t4_coin, coin_original: t4_coin_orig }
 
     {
       **result_of_at_least_onces(t3, t4, 5, 6, 7),
