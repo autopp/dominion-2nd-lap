@@ -213,6 +213,17 @@ module GenDecksHelper
       yield factory, indices - estates
     end
   end
+
+  def gen_decks_with_double(card)
+    with_combination_of_estates(12) do |factory, other_indices|
+      other_indices.combination(2).map do |gained|
+        factory.new_deck do |deck|
+          deck[gained[0]] = card
+          deck[gained[1]] = card
+        end
+      end
+    end
+  end
 end
 
 module GenDecksWithSilverAndAction
@@ -230,14 +241,7 @@ end
 
 module GenDecksWithDoubleSilver
   def gen_decks
-    with_combination_of_estates(12) do |factory, other_indices|
-      other_indices.combination(2).map do |silvers|
-        factory.new_deck do |deck|
-          deck[silvers[0]] = Tactic::SILVER
-          deck[silvers[1]] = Tactic::SILVER
-        end
-      end
-    end
+    gen_decks_with_double(Tactic::SILVER)
   end
 end
 
