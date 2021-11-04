@@ -70,6 +70,24 @@ class BountyHunterOnly < BountyHunter
   end
 end
 
+class BountyHunterWithCurse < BountyHunter
+  def title
+    '賞金稼ぎ・呪い（あるいは工房など）で4ターン目までに……'
+  end
+
+  def gen_decks
+    with_combination_of_estates(12, num_of_estate: 4) do |factory, other_indices|
+      other_indices.map do |action|
+        factory.new_deck do |deck|
+          deck[action] = ACTION
+        end
+      end
+    end
+  end
+end
+
 BountyHunterWithSilver.new.report
 puts
 BountyHunterOnly.new.report
+puts
+BountyHunterWithCurse.new.report
