@@ -54,6 +54,22 @@ class BountyHunterWithSilver < BountyHunter
   include GenDecksWithSilverAndAction
 end
 
+class BountyHunterWithCopper < BountyHunter
+  def title
+    '銅貨（あるいは農民など）・Bounty Hunter で4ターン目までに……'
+  end
+
+  def gen_decks
+    with_combination_of_estates(12) do |factory, other_indices|
+      other_indices.map do |action|
+        factory.new_deck do |deck|
+          deck[action] = ACTION
+        end
+      end
+    end
+  end
+end
+
 class BountyHunterOnly < BountyHunter
   def title
     'Bounty Hunter・パス（あるいは騎士見習いなど）で4ターン目までに……'
@@ -87,6 +103,8 @@ class BountyHunterWithCurse < BountyHunter
 end
 
 BountyHunterWithSilver.new.report
+puts
+BountyHunterWithCopper.new.report
 puts
 BountyHunterOnly.new.report
 puts
