@@ -63,6 +63,42 @@ class SilverCathedral < Cathedral
   end
 end
 
+class CathedralGold < Cathedral
+  def title
+    '大聖堂・金貨（あるいは石切場など）で4ターン目までに……'
+  end
+
+  def gen_decks
+    with_combination_of_estates(10, num_of_estate: 2) do |factory, other_indices|
+      other_indices.map do |silver|
+        factory.new_deck do |deck|
+          deck[silver] = GOLD
+        end
+      end
+    end
+  end
+end
+
+class GoldCathedral < Cathedral
+  def title
+    '金貨（あるいは石切り場など）・大聖堂で4ターン目までに……'
+  end
+
+  def gen_decks
+    with_combination_of_estates(11) do |factory, other_indices|
+      other_indices.map do |silver|
+        factory.new_deck do |deck|
+          deck[silver] = GOLD
+        end
+      end
+    end
+  end
+end
+
 CathedralSilver.new.report
 puts
 SilverCathedral.new.report
+puts
+CathedralGold.new.report
+puts
+GoldCathedral.new.report
